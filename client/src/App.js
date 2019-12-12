@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+//import './App.css';
 import Customers from './components/customers';
+import Main from './components/Main';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">React Express Starter</h1>
-        </header>
-        <Customers />
+        <React.Fragment>
+          <CssBaseline />
+          <Header />
+          <Main />
+          <Footer />
+        </React.Fragment>
       </div>
     );
   }
