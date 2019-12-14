@@ -2,14 +2,18 @@ const express = require('express');
 
 const app = express();
 
-app.get('/api/customers', (req, res) => {
-  const customers = [
-    {id: 1, firstName: 'John', lastName: 'Doe'},
-    {id: 2, firstName: 'Brad', lastName: 'Traversy'},
-    {id: 3, firstName: 'Mary', lastName: 'Swanson'},
-  ];
+function createData(name, link, description, hits) {
+  return { name, link, description, hits };
+}
 
-  res.json(customers);
+// link must start with http or https
+const rows = [
+  createData('neneTV', 'http://www.nene365.com', '종합 스포츠 중계 사이트', 100),
+];
+
+// api route
+app.get('/api/links', (req, res) => {
+  res.json(rows);
 });
 
 const port = 5000;
