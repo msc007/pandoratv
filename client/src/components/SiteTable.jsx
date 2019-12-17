@@ -8,6 +8,11 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import StandingModal from './StandingModal';
+import NextMatchModal from './NextMatchModal';
+import SonModal from './SonModal';
+import PremierScheduleModal from './PremierScheduleModal';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,8 +25,10 @@ const useStyles = makeStyles(theme => ({
   container: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
-  }
-
+  },
+  buttonContainer: {
+    padding: theme.spacing(0, 0, 8),
+  },
 }));
 
 export default function SiteTable() {
@@ -37,7 +44,15 @@ export default function SiteTable() {
 
   return (
     <div className={classes.container}>
-      <Container>
+      <Container maxWidth='md'>
+        <Box display='flex' justifyContent='center' className={classes.buttonContainer}>
+            <StandingModal />
+            <PremierScheduleModal />
+            <NextMatchModal />
+            <SonModal />
+        </Box>
+      </Container>
+      <Container maxWidth='lg'>
         <Paper className={classes.root}>
           <Table className={classes.table} aria-label='simple table'>
             <TableHead>
@@ -46,18 +61,20 @@ export default function SiteTable() {
                 <TableCell>Name</TableCell>
                 <TableCell align='center'>Link</TableCell>
                 <TableCell align='center'>Description</TableCell>
+                <TableCell align='center'>Language</TableCell>
                 <TableCell align='center'>Hits</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map((row, index) => (
-                <TableRow key={row.name}>
+                <TableRow hover key={row.name}>
                   <TableCell>{index+1}</TableCell>
                   <TableCell component='th' scope='row'>{row.name}</TableCell>
                   <TableCell align='center'>      
                     <Link color="inherit" href={row.link} target='_blank'>{row.link}</Link>        
                   </TableCell>
                   <TableCell align='center'>{row.description}</TableCell>
+                  <TableCell align='center'>{row.language}</TableCell>
                   <TableCell align='center'>{row.hits}</TableCell>
                 </TableRow>
               ))}
