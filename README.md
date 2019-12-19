@@ -25,7 +25,6 @@ npm run server
 npm run client
 
 # Run the production environment
-npm install cors
 npm run production
 
 # Server runs on http://localhost:5000 and client on http://localhost:3000
