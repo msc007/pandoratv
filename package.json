@@ -9,7 +9,7 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "production": "NODE_ENV=production nodemon server.js"
+    "production": "NODE_ENV=production node server.js"
   },
   "author": "Brad Traversy",
   "license": "MIT",
