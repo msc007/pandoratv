@@ -5,7 +5,7 @@ const ENV = process.env.NODE_ENV || 'dev';
 if( ENV === 'production') {
   console.log('Production Environment');
   const cors = require('cors');
-  app.use(cors({origin: 'https://d1lpq3w1jq8hx2.cloudfront.net/'}));
+  app.use(cors({origin: 'https://pandoratv.cf'}));
 }
 
 function createData(name, link, description, language, hits) {
