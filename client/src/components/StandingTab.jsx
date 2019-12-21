@@ -55,7 +55,7 @@ export default function FullWidthTabs() {
   };
 
   return (
-    <React.Fragment className={classes.root}>
+    <React.Fragment>
       <Container maxWidth='md'>
         <AppBar position="static" color="default">
           <Tabs
@@ -73,15 +73,15 @@ export default function FullWidthTabs() {
           </Tabs>
         </AppBar>
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <iframe title='Premier League' frameborder="0"  scrolling="no" width="600" height="500" src="https://www.fctables.com/england/premier-league/iframe/?type=table&lang_id=2&country=67&template=10&timezone=Pacific/Midway&time=24&po=1&ma=1&wi=1&dr=1&los=1&gf=1&ga=1&gd=1&pts=1&ng=0&form=0&width=600&height=600&font=Verdana&fs=12&lh=22&bg=FFFFFF&fc=333333&logo=1&tlink=1&scfs=22&scfc=333333&scb=1&sclg=1&teamls=80&ths=1&thb=1&thba=FFFFFF&thc=000000&bc=dddddd&hob=f5f5f5&hobc=ebe7e7&lc=333333&sh=1&hfb=1&hbc=3bafda&hfc=FFFFFF"></iframe>        </TabPanel>
+            <iframe title='Premier League' frameBorder="0"  scrolling="no" width="600" height="500" src="https://www.fctables.com/england/premier-league/iframe/?type=table&lang_id=2&country=67&template=10&timezone=Pacific/Midway&time=24&po=1&ma=1&wi=1&dr=1&los=1&gf=1&ga=1&gd=1&pts=1&ng=0&form=0&width=600&height=600&font=Verdana&fs=12&lh=22&bg=FFFFFF&fc=333333&logo=1&tlink=1&scfs=22&scfc=333333&scb=1&sclg=1&teamls=80&ths=1&thb=1&thba=FFFFFF&thc=000000&bc=dddddd&hob=f5f5f5&hobc=ebe7e7&lc=333333&sh=1&hfb=1&hbc=3bafda&hfc=FFFFFF"></iframe>        </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
-            <iframe title='Bundesliga' frameborder="0"  scrolling="no" width="600" height="500" src="https://www.fctables.com/germany/1-bundesliga/iframe/?type=table&lang_id=2&country=83&template=16&team=&timezone=Pacific/Midway&time=24&po=1&ma=1&wi=1&dr=1&los=1&gf=1&ga=1&gd=1&pts=1&ng=0&form=0&width=600&height=600&font=Verdana&fs=12&lh=22&bg=FFFFFF&fc=333333&logo=1&tlink=1&scfs=22&scfc=333333&scb=1&sclg=1&teamls=80&ths=1&thb=1&thba=FFFFFF&thc=000000&bc=dddddd&hob=f5f5f5&hobc=ebe7e7&lc=333333&sh=1&hfb=1&hbc=3bafda&hfc=FFFFFF"></iframe>
+            <iframe title='Bundesliga' frameBorder="0"  scrolling="no" width="600" height="500" src="https://www.fctables.com/germany/1-bundesliga/iframe/?type=table&lang_id=2&country=83&template=16&team=&timezone=Pacific/Midway&time=24&po=1&ma=1&wi=1&dr=1&los=1&gf=1&ga=1&gd=1&pts=1&ng=0&form=0&width=600&height=600&font=Verdana&fs=12&lh=22&bg=FFFFFF&fc=333333&logo=1&tlink=1&scfs=22&scfc=333333&scb=1&sclg=1&teamls=80&ths=1&thb=1&thba=FFFFFF&thc=000000&bc=dddddd&hob=f5f5f5&hobc=ebe7e7&lc=333333&sh=1&hfb=1&hbc=3bafda&hfc=FFFFFF"></iframe>
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            <iframe title='La Liga' frameborder="0"  scrolling="no" width="600" height="500" src="https://www.fctables.com/spain/liga-bbva/iframe/?type=table&lang_id=2&country=201&template=43&timezone=Pacific/Midway&time=24&po=1&ma=1&wi=1&dr=1&los=1&gf=1&ga=1&gd=1&pts=1&ng=0&form=0&width=600&height=600&font=Verdana&fs=12&lh=22&bg=FFFFFF&fc=333333&logo=1&tlink=1&scfs=22&scfc=333333&scb=1&sclg=1&teamls=80&ths=1&thb=1&thba=FFFFFF&thc=000000&bc=dddddd&hob=f5f5f5&hobc=ebe7e7&lc=333333&sh=1&hfb=1&hbc=3bafda&hfc=FFFFFF"></iframe>
+            <iframe title='La Liga' frameBorder="0"  scrolling="no" width="600" height="500" src="https://www.fctables.com/spain/liga-bbva/iframe/?type=table&lang_id=2&country=201&template=43&timezone=Pacific/Midway&time=24&po=1&ma=1&wi=1&dr=1&los=1&gf=1&ga=1&gd=1&pts=1&ng=0&form=0&width=600&height=600&font=Verdana&fs=12&lh=22&bg=FFFFFF&fc=333333&logo=1&tlink=1&scfs=22&scfc=333333&scb=1&sclg=1&teamls=80&ths=1&thb=1&thba=FFFFFF&thc=000000&bc=dddddd&hob=f5f5f5&hobc=ebe7e7&lc=333333&sh=1&hfb=1&hbc=3bafda&hfc=FFFFFF"></iframe>
           </TabPanel>
           <TabPanel value={value} index={3} dir={theme.direction}>
-            <iframe title='Serie A' frameborder="0"  scrolling="no" width="600" height="500" src="https://www.fctables.com/italy/serie-a/iframe/?type=table&lang_id=2&country=108&template=17&timezone=Pacific/Midway&time=24&po=1&ma=1&wi=1&dr=1&los=1&gf=1&ga=1&gd=1&pts=1&ng=0&form=0&width=600&height=600&font=Verdana&fs=12&lh=22&bg=FFFFFF&fc=333333&logo=1&tlink=1&scfs=22&scfc=333333&scb=1&sclg=1&teamls=80&ths=1&thb=1&thba=FFFFFF&thc=000000&bc=dddddd&hob=f5f5f5&hobc=ebe7e7&lc=333333&sh=1&hfb=1&hbc=3bafda&hfc=FFFFFF"></iframe>
+            <iframe title='Serie A' frameBorder="0"  scrolling="no" width="600" height="500" src="https://www.fctables.com/italy/serie-a/iframe/?type=table&lang_id=2&country=108&template=17&timezone=Pacific/Midway&time=24&po=1&ma=1&wi=1&dr=1&los=1&gf=1&ga=1&gd=1&pts=1&ng=0&form=0&width=600&height=600&font=Verdana&fs=12&lh=22&bg=FFFFFF&fc=333333&logo=1&tlink=1&scfs=22&scfc=333333&scb=1&sclg=1&teamls=80&ths=1&thb=1&thba=FFFFFF&thc=000000&bc=dddddd&hob=f5f5f5&hobc=ebe7e7&lc=333333&sh=1&hfb=1&hbc=3bafda&hfc=FFFFFF"></iframe>
           </TabPanel>
       </Container>
     </React.Fragment>
