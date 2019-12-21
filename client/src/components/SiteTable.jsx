@@ -37,7 +37,7 @@ export default function SiteTable() {
   const [rows, setRows] = useState([]);
   // React hook replace component lifecyle method, empty array makes the effect run on first render.
   useEffect(() => {
-    fetch('/api/links')  // For production: https://pandoratv.tk/api/links"
+    fetch('https://pandoratv.tk/api/links')  
       .then(res => res.json())
       .then(rows => setRows([...rows]));
   }, []);
