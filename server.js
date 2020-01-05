@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const db = require('./config/keys').MongoURI;
 const app = express();
+const Link = require('./models/Link');
+
 const ENV = process.env.NODE_ENV || 'dev';
 
 if( ENV === 'production') {
@@ -44,20 +46,49 @@ const communityRows = [
     createData('한국일보', 'http://www.koreatimes.com', '미주 한국일보', '한국어', 100),
 ];
 
-// api route
-app.get('/api/links/livesports', (req, res) => {
-  res.json(liveSportsRows);
+/****** RESTful APIs *******/
+
+// LIVESPORTS
+app.get('/api/links/livesports', async (req, res) => {
+  try {
+    let sportsList = [];
+    const links = await Link.find({category: 'sports'});
+    for(link of links) {
+      sportsList.push(link);
+    }
+    res.json(sportsList);
+  } catch(err) {
+    res.status(500).json({message: err.message});
+  }  
 });
 
-app.get('/api/links/webhard', (req, res) => {
-  res.json(webHardRows);
+// WEBHARD
+app.get('/api/links/webhard', async (req, res) => {
+  try {
+    let webHardList = [];
+    const links = await Link.find({category: 'webhard'});
+    for(link of links) {
+      webHardList.push(link);
+    }
+    res.json(webHardList);
+  } catch(err) {
+    res.status(500).json({message: err.message});
+  }  
 });
 
-app.get('/api/links/community', (req, res) => {
-  res.json(communityRows);
+// COMMUNITY
+app.get('/api/links/community', async (req, res) => {
+  try {
+    let communityList = [];
+    const links = await Link.find({category: 'community'});
+    for(link of links) {
+      communityList.push(link);
+    }
+    res.json(communityList);
+  } catch(err) {
+    res.status(500).json({message: err.message});
+  }  
 });
-
 
 const port = 5000;
-
 app.listen(port, () => `Server running on port ${port}`);

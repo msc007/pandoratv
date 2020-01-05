@@ -52,7 +52,6 @@ export default function SiteTable() {
                 <TableCell>Name</TableCell>
                 <TableCell align='center'>Link</TableCell>
                 <TableCell align='center'>Description</TableCell>
-                <TableCell align='center'>Language</TableCell>
                 <TableCell align='center'>Hits</TableCell>
               </TableRow>
             </TableHead>
@@ -65,7 +64,6 @@ export default function SiteTable() {
                     <Link color="inherit" href={row.link} target='_blank'>{row.link}</Link>        
                   </TableCell>
                   <TableCell align='center'>{row.description}</TableCell>
-                  <TableCell align='center'>{row.language}</TableCell>
                   <TableCell align='center'>{row.hits}</TableCell>
                 </TableRow>
               ))}

@@ -25,7 +25,7 @@ export default function DrawerList() {
             </ListItemIcon>
             <ListItemText primary="홈" />
           </ListItem>
-          <ListItem button component={Link} to='/sitetable' onClick={()=> setActive('/sitetable')} selected={active === '/sitetable' ? true : false}>
+          <ListItem button component={Link} to='/sports' onClick={()=> setActive('/sports')} selected={active === '/sports' ? true : false}>
             <ListItemIcon>
               <LiveTvIcon />
             </ListItemIcon>

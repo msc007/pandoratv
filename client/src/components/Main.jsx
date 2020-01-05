@@ -17,7 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import LiveTvIcon from '@material-ui/icons/LiveTv';
 //Routes
 import Home from './Home';
-import SiteTable from './SiteTable';
+import SportsTable from './SportsTable';
 import WebHardTable from './WebHardTable';
 import CommunityTable from './CommunityTable';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -180,7 +180,7 @@ export default function Main2() {
         <Container maxWidth="lg" className={classes.container}>
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/sitetable" component={SiteTable} />
+            <Route path="/sports" component={SportsTable} />
             <Route path="/webhard" component={WebHardTable} />
             <Route path="/community" component={CommunityTable} />
           </Switch>
