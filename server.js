@@ -1,4 +1,6 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const db = require('./config/keys').MongoURI;
 const app = express();
 const ENV = process.env.NODE_ENV || 'dev';
 
@@ -7,6 +9,12 @@ if( ENV === 'production') {
   const cors = require('cors');
   app.use(cors({origin: 'https://pandoratv.cf'}));
 }
+
+mongoose
+  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log('Failed to connect: ', err));
+
 
 function createData(name, link, description, language, hits) {
   return { name, link, description, language, hits };
