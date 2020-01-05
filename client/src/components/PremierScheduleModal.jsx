@@ -22,7 +22,7 @@ export default function AlertDialogSlide() {
 
   return (
     <React.Fragment>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" color="primary" onClick={handleClickOpen} fullWidth>
         프리미어리그 경기 일정
       </Button>
       <Dialog

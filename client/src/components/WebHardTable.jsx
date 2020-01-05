@@ -1,29 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
+//card
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    overflowX: 'auto',
-  },
-  table: {
-    minWidth: 650,
-  },
   container: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
   },
   buttonContainer: {
     padding: theme.spacing(0, 0, 8),
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cardMedia: {
+    paddingTop: '56.25%', // 16:9
+  },
+  cardContent: {
+    flexGrow: 1,
   },
 }));
 
@@ -40,36 +49,41 @@ export default function SiteTable() {
 
   return (
     <div className={classes.container}>
-      <Container maxWidth='lg'>
+      <Container className={classes.cardGrid} maxWidth="lg">
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
           미주 한인 웹하드
         </Typography>
-        <Paper className={classes.root}>
-          <Table className={classes.table} aria-label='simple table'>
-            <TableHead>
-              <TableRow>
-                <TableCell>#</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell align='center'>Link</TableCell>
-                <TableCell align='center'>Description</TableCell>
-                <TableCell align='center'>Hits</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row, index) => (
-                <TableRow hover key={row.name}>
-                  <TableCell>{index+1}</TableCell>
-                  <TableCell component='th' scope='row'>{row.name}</TableCell>
-                  <TableCell align='center'>      
-                    <Link color="inherit" href={row.link} target='_blank'>{row.link}</Link>        
-                  </TableCell>
-                  <TableCell align='center'>{row.description}</TableCell>
-                  <TableCell align='center'>{row.hits}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Paper>
+        <Grid container spacing={4}>
+          {rows.map(card => (
+            <Grid item key={card.name} xs={12} sm={6} md={4} lg={3}>
+              <Card className={classes.card}>
+                {/*<CardMedia
+                  className={classes.cardMedia}
+                  image="https://source.unsplash.com/random"
+                  title="Image title"
+                />*/}
+                <CardActionArea component='a' href={card.link} target='_blank'>
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {card.name}
+                    </Typography>
+                    <Typography>
+                      {card.description}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions>
+                  <Button size="small" color="primary">
+                    View
+                  </Button>
+                  <Button size="small" color="primary">
+                    Edit
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </Container>
     </div>
   );

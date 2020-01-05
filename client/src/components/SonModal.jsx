@@ -21,7 +21,7 @@ export default function AlertDialogSlide() {
 
   return (
     <React.Fragment>
-      <Button  variant="contained" color="primary" onClick={handleClickOpen}>
+      <Button  variant="contained" color="primary" onClick={handleClickOpen} fullWidth>
         손흥민 스텟
       </Button>
       <Dialog

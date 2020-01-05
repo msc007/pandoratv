@@ -23,7 +23,7 @@ export default function AlertDialogSlide() {
 
   return (
     <React.Fragment>
-      <Button variant="contained" color="primary" onClick={handleClickOpen} >
+      <Button variant="contained" color="primary" onClick={handleClickOpen} fullWidth fullHeight>
         해회 축구 순위표
       </Button>
       <Dialog

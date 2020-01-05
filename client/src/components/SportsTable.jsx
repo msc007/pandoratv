@@ -21,9 +21,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
   },
-  buttonContainer: {
-    padding: theme.spacing(0, 0, 8),
-  },
   cardGrid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
@@ -55,20 +52,25 @@ export default function SiteTable() {
   return (
     <div className={classes.container}>
       <Container maxWidth='lg'>
-        <Box display='flex' justifyContent='center' className={classes.buttonContainer}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
             <StandingModal />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
             <PremierScheduleModal />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
             <NextMatchModal />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
             <SonModal />
-        </Box>
-        <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          스포츠 라이브 중계 사이트
-        </Typography>
+          </Grid>
+        </Grid>
       </Container>
-     <Container className={classes.cardGrid} maxWidth="lg">
+      <Container className={classes.cardGrid} maxWidth="lg">
         <Grid container spacing={4}>
           {rows.map(card => (
-            <Grid item key={card} xs={12} sm={6} md={4} lg={3}>
+            <Grid item key={card.name} xs={12} sm={6} md={4} lg={3}>
               <Card className={classes.card}>
                 {/*<CardMedia
                   className={classes.cardMedia}
