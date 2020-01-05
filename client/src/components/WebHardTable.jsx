@@ -8,11 +8,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-import StandingModal from './StandingModal';
-import NextMatchModal from './NextMatchModal';
-import SonModal from './SonModal';
-import PremierScheduleModal from './PremierScheduleModal';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
@@ -38,24 +33,16 @@ export default function SiteTable() {
   const [rows, setRows] = useState([]);
   // React hook replace component lifecyle method, empty array makes the effect run on first render.
   useEffect(() => {
-    fetch('/api/links/livesports')  // For production: https://pandoratv.tk/api/links"
+    fetch('/api/links/webhard')  // For production: https://pandoratv.tk/api/links"
       .then(res => res.json())
       .then(rows => setRows([...rows]));
   }, []);
 
   return (
     <div className={classes.container}>
-      <Container maxWidth='md'>
-        <Box display='flex' justifyContent='center' className={classes.buttonContainer}>
-            <StandingModal />
-            <PremierScheduleModal />
-            <NextMatchModal />
-            <SonModal />
-        </Box>
-      </Container>
       <Container maxWidth='lg'>
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          스포츠 라이브 중계 사이트
+          미주 한인 웹하드
         </Typography>
         <Paper className={classes.root}>
           <Table className={classes.table} aria-label='simple table'>
