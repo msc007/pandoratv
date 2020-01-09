@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-//import './App.css';
 import Main from './components/Main';
-
 import CssBaseline from '@material-ui/core/CssBaseline';
+import {createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
+
+// For Responsive Typography
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
 
 class App extends Component {
   render() {
@@ -10,7 +13,9 @@ class App extends Component {
       <div className="App">
         <React.Fragment>
           <CssBaseline />
-          <Main />
+          <ThemeProvider theme={theme}>
+            <Main />
+          </ThemeProvider>
         </React.Fragment>
       </div>
     );

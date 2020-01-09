@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+//import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import UserTable from './UserTable';
 
 const useStyles = makeStyles(theme => ({
-  heroContent: {
+  root: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
   },  
@@ -29,51 +31,65 @@ const useStyles = makeStyles(theme => ({
   cardContent: {
     flexGrow: 1,
   },
+  cardAction: {
+    diaplay: 'flex',
+  },
+  cardButton: {
+    marginLeft: 'auto',
+  }
 }));
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Home() {
   const classes = useStyles();
+  // React hook initialize state and setter
+  const [rows, setRows] = useState([]);
+  // React hook replace component lifecyle method, empty array makes the effect run on first render.
+  useEffect(() => {
+    fetch('/api/links/home')  // For production: https://pandoratv.tk/api/user"
+      .then(res => res.json())
+      .then(rows => setRows([...rows]));
+  }, []);
 
   return (
-    <div className={classes.heroContent}>
+    <div className={classes.root}>
       <Container maxWidth="lg">
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          안녕하세요 저희 PandoraTV는 해외 거주 한인분들의 좀더 원활한 스포츠 관람을 돕기위해 만들어졌습니다.
-          매번 구글에 검색하기 귀찮고 특정 사이트 버퍼링이 심하시다면 아래 목록에서 원활한 스트리밍 사이트를 찿아보세요! 
+          안녕하세요 저희 PandoraTV는 해외 거주 한인분들의 좀더 원활한 생활을 위하여 만들어졌습니다.
+          미주 한인들에게 유익한 사이트들을 조금더 손쉽게 찾아 보실수있습니다.
         </Typography>
       </Container>
      <Container className={classes.cardGrid} maxWidth="lg">
         <Grid container spacing={4}>
-          {cards.map(card => (
-            <Grid item key={card} xs={12} sm={6} md={4} lg={3}>
+          {rows.map(card => (
+            <Grid item key={card.name} xs={12} sm={6} md={4} lg={3}>
               <Card className={classes.card}>
                 {/*<CardMedia
                   className={classes.cardMedia}
                   image="https://source.unsplash.com/random"
                   title="Image title"
                 />*/}
-                <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Heading
-                  </Typography>
-                  <Typography>
-                    This is a media card. You can use this section to describe the content.
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    View
-                  </Button>
-                  <Button size="small" color="primary">
-                    Edit
+                <CardActionArea component='a' href={card.link} target='_blank'>
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {card.name}
+                    </Typography>
+                    <Typography variant='body2'>
+                      {card.description}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <CardActions className={classes.cardAction}>
+                  <Button size="small" color="secondary" className={classes.cardButton}>
+                    버그신고
                   </Button>
                 </CardActions>
               </Card>
             </Grid>
           ))}
         </Grid>
+      </Container>
+      <Container maxWidth="lg">
+        <UserTable />
       </Container>
     </div>
   );

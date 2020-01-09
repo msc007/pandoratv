@@ -5,7 +5,6 @@ import StandingModal from './StandingModal';
 import NextMatchModal from './NextMatchModal';
 import SonModal from './SonModal';
 import PremierScheduleModal from './PremierScheduleModal';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 // Card
 import Button from '@material-ui/core/Button';
@@ -13,7 +12,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+//import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
@@ -38,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SiteTable() {
+export default function SportsTable() {
   const classes = useStyles();
   // React hook initialize state and setter
   const [rows, setRows] = useState([]);
@@ -68,6 +67,9 @@ export default function SiteTable() {
         </Grid>
       </Container>
       <Container className={classes.cardGrid} maxWidth="lg">
+        <Typography variant="h5" align="center" color="textSecondary" paragraph>
+          라이브 스포츠 스트리밍 사이트
+        </Typography>
         <Grid container spacing={4}>
           {rows.map(card => (
             <Grid item key={card.name} xs={12} sm={6} md={4} lg={3}>

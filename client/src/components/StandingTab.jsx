@@ -31,6 +31,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
+// Props for tabs
 function a11yProps(index) {
   return {
     id: `full-width-tab-${index}`,
@@ -41,11 +42,10 @@ function a11yProps(index) {
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    //width: 500,
   }
 }));
 
-export default function FullWidthTabs() {
+export default function StandingTab() {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);

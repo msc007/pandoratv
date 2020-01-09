@@ -3,7 +3,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-//import ListSubheader from '@material-ui/core/ListSubheader';
 import { Link, useLocation } from 'react-router-dom';
 // Icons
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -19,7 +18,7 @@ export default function DrawerList() {
     <React.Fragment>
       <Divider />
         <List>
-          <ListItem button component={Link} to='/' onClick={()=> setActive('/')} selected={active === '/' ? true : false}>
+          <ListItem button component={Link} to='/' onClick={()=> setActive('/')} selected={active === '/' ? true : false}> 
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>

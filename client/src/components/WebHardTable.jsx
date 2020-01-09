@@ -8,7 +8,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+//import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
@@ -18,10 +18,6 @@ const useStyles = makeStyles(theme => ({
   },
   buttonContainer: {
     padding: theme.spacing(0, 0, 8),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
   },
   card: {
     height: '100%',
@@ -49,7 +45,7 @@ export default function SiteTable() {
 
   return (
     <div className={classes.container}>
-      <Container className={classes.cardGrid} maxWidth="lg">
+      <Container maxWidth="lg">
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
           미주 한인 웹하드
         </Typography>
