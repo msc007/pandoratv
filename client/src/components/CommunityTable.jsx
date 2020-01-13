@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
+// Material-ui
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-//card
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-//import CardMedia from '@material-ui/core/CardMedia';
-import Grid from '@material-ui/core/Grid';
 
+// Style
 const useStyles = makeStyles(theme => ({
   container: {
     backgroundColor: theme.palette.background.paper,
@@ -32,7 +32,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CommunityTable() {
+// CommunityTable FUnctional Component
+const CommunityTable = () => {
   const classes = useStyles();
   // React hook initialize state and setter
   const [rows, setRows] = useState([]);
@@ -84,3 +85,5 @@ export default function CommunityTable() {
     </div>
   );
 }
+
+export default CommunityTable;

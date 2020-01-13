@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// Material-ui
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -8,7 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 
-function TabPanel(props) {
+// Tabpanel functional component
+const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -45,7 +47,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function StandingTab() {
+// StandingTab functional component
+const StandingTab = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -88,3 +91,5 @@ export default function StandingTab() {
     </React.Fragment>
   );
 }
+
+export default StandingTab;

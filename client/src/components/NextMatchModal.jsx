@@ -1,21 +1,23 @@
 import React from 'react';
+// Material-ui
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import Slide from '@material-ui/core/Slide';
 
+// Modal Transition
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AlertDialogSlide() {
+// NextMatchModal functional Component
+const NextMatchModal = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -42,3 +44,5 @@ export default function AlertDialogSlide() {
     </React.Fragment>
   );
 }
+
+export default NextMatchModal;

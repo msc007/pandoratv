@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from "react";
+// Material-ui
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-//import CardMedia from '@material-ui/core/CardMedia';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-//Table
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+import TextField from '@material-ui/core/TextField';
 
-
+// Style
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
@@ -35,8 +34,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-export default function UserTable() {
+// UserTable Functional Component
+const UserTable = () => {
   const classes = useStyles();
   // React hook initialize state and setter
   const [rows, setRows] = useState([]);
@@ -82,7 +81,7 @@ export default function UserTable() {
       alert('Error occured during submit: ' + err);
     }
   }
-
+  
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
@@ -129,6 +128,7 @@ export default function UserTable() {
                 label="사이트명 (20자 이내로 입력)"
                 fullWidth
                 required
+                autoComplete="off"
               />
               <TextField
                 value={siteLink}
@@ -137,6 +137,7 @@ export default function UserTable() {
                 label="사이트 주소 (http, https 포함하여 입력)"
                 fullWidth
                 required
+                autoComplete="off"
               />
               <TextField
                 value={siteDescription}
@@ -145,6 +146,7 @@ export default function UserTable() {
                 label="사이트 설명 (30자 이내로 입력)"
                 fullWidth
                 required
+                autoComplete="off"
               />
             </CardContent>
             <CardActions>
@@ -157,3 +159,5 @@ export default function UserTable() {
     </div>
   );
 }
+
+export default UserTable;

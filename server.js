@@ -1,4 +1,6 @@
+const ENV = process.env.NODE_ENV || 'dev';
 const express = require('express');
+const helmet = require('helmet');
 const validator = require('validator');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
@@ -6,7 +8,7 @@ const app = express();
 // Modal Schema
 const Link = require('./models/Link');
 const UserLink = require('./models/UserLink');
-const ENV = process.env.NODE_ENV || 'dev';
+const Post = require('./models/Post');
 
 /****** MIDDLEWARE*******/
 if( ENV === 'production') {
@@ -14,88 +16,84 @@ if( ENV === 'production') {
   const cors = require('cors');
   app.use(cors({origin: 'https://pandoratv.cf'}));
 }
+app.use(helmet());  // For security: consider csurf package later on
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 /****** DB CONNECTION *******/
-const db = process.env.MongoURI;
+const db = process.env.MONGO_URI;
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log('Failed to connect: ', err));
 
 /****** RESTful APIs *******/
+// POST
+app.get('/api/posts/:postId', async (req, res) => {
+  try {
+    const post = await Post.findByIdAndUpdate({ _id: req.params.postId }, { $inc: { hits: 1} }); // increment hits
+    if(post) {
+      res.json(post);
+    }
+  } catch(err) {
+    res.sendStatus(500).json({errorMessage: err.message});
+  }  
+});
+// TRENDING
+app.get('/api/trending', async (req, res) => {
+  try {
+    const posts = await Post.find({}).sort({ hits: -1 }); // Descending order
+    res.json(posts);
+  } catch(err) {
+    res.sendStatus(500).json({errorMessage: err.message});
+  }  
+});
 
 // LIVESPORTS
 app.get('/api/links/livesports', async (req, res) => {
   try {
-    let sportsList = [];
     const links = await Link.find({category: 'sports'});
-    for(link of links) {
-      sportsList.push(link);
-    }
-    res.json(sportsList);
+    res.json(links);
   } catch(err) {
     res.sendStatus(500).json({errorMessage: err.message});
   }  
 });
-
 // WEBHARD
 app.get('/api/links/webhard', async (req, res) => {
   try {
-    let webHardList = [];
     const links = await Link.find({category: 'webhard'});
-    for(link of links) {
-      webHardList.push(link);
-    }
-    res.json(webHardList);
+    res.json(links);
   } catch(err) {
     res.sendStatus(500).json({errorMessage: err.message});
   }  
 });
-
 // COMMUNITY
 app.get('/api/links/community', async (req, res) => {
   try {
-    let communityList = [];
     const links = await Link.find({category: 'community'});
-    for(link of links) {
-      communityList.push(link);
-    }
-    res.json(communityList);
+    res.json(links);
   } catch(err) {
     res.sendStatus(500).json({errorMessage: err.message});
   }  
 });
-
 // Home
 app.get('/api/links/home', async (req, res) => {
   try {
-    let homeList = [];
     const links = await Link.find().sort({hits: -1});
-    for(link of links) {
-      homeList.push(link);
-    }
-    res.json(homeList);
+    res.json(links);
   } catch(err) {
     res.sendStatus(500).json({errorMessage: err.message});
   }  
 });
-
 // USER ADDED LINKS
 app.get('/api/links/user', async (req, res) => {
   try {
-    let userList = [];
     const links = await UserLink.find().sort({hits: -1});
-    for(link of links) {
-      userList.push(link);
-    }
-    res.json(userList);
+    res.json(links);
   } catch(err) {
     res.sendStatus(500).json({errorMessage: err.message});
   }  
 });
-
 app.post('/api/links/user', async (req, res) => {
   try {
     // Serverside input validation

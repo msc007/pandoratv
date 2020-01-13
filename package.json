@@ -7,8 +7,9 @@
     "client-install": "cd client && npm install",
     "start": "node server.js",
     "server": "nodemon server.js",
+    "crawler": "nodemon crawler.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run crawler\"",
     "production": "NODE_ENV=production node server.js"
   },
   "author": "Brad Traversy",
@@ -17,10 +18,13 @@
     "nodemon": "^1.14.6"
   },
   "dependencies": {
+    "axios": "^0.19.1",
+    "cheerio": "^1.0.0-rc.3",
     "concurrently": "^3.5.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.16.2",
+    "helmet": "^3.21.2",
     "mongoose": "^5.8.4",
     "validator": "^12.1.0"
   }
