@@ -10,7 +10,8 @@ const PostSchema = new Schema({
   text: String,
   category: String,
   hits: Number,
-});
+
+}, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
 
 /*
  * Note: Mongoose automatically looks for the plural, lowercased version of your model name.

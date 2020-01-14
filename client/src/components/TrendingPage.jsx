@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
+// Material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-//card
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -38,9 +38,6 @@ const TrendingPage = () => {
       .then(rows => setRows([...rows]));
   }, []);
 
-  if(rows && rows[0]){
-    console.log(rows[0]._id);
-  }
   return (
     <div className={classes.container}>
        <Container maxWidth="lg">
@@ -48,14 +45,14 @@ const TrendingPage = () => {
           {rows.map(card => (
             <Grid item key={card.title} xs={12} sm={6} md={4} lg={3}>
               <Card className={classes.card}>
-                <CardActionArea component='a' href={`/contents/${card._id}`} >
+                <CardActionArea component='a' href={`/contents/${card._id}`}>
                   <CardMedia
                   className={classes.cardMedia}
                   image={card.img_urls[0]}
                   title={card.title}
                   />
                   <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h7">
+                    <Typography gutterBottom variant="subtitle2">
                       {card.title}
                     </Typography>
                   </CardContent>

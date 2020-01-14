@@ -43,7 +43,17 @@ const CommunityTable = () => {
       .then(res => res.json())
       .then(rows => setRows([...rows]));
   }, []);
+  // Increment view count of site
+  const handleViewCount = async (id) => {
+    const res = await fetch(`/api/links/views/${id}`, {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},
+    });
 
+    if(res.status !== 200) {
+      console.log('Error occured during update view count');
+    }
+  }
   return (
     <div className={classes.container}>
        <Container maxWidth="lg">
@@ -59,7 +69,7 @@ const CommunityTable = () => {
                   image="https://source.unsplash.com/random"
                   title="Image title"
                 />*/}
-                <CardActionArea component='a' href={card.link} target='_blank'>
+                <CardActionArea component='a' href={card.link} target='_blank' onClick={() => handleViewCount(card._id)}>
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
                       {card.name}

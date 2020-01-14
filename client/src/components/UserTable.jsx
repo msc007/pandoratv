@@ -53,13 +53,13 @@ const UserTable = () => {
     try {
       e.preventDefault();
       const res = await fetch('/api/links/user', {
-                          method: 'POST',
-                          headers: {'Content-Type': 'application/json'},
-                          body: JSON.stringify({
-                            'siteName': siteName,
-                            'siteLink': siteLink,
-                            'siteDescription': siteDescription
-                          })
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          'siteName': siteName,
+          'siteLink': siteLink,
+          'siteDescription': siteDescription
+        })
       });
       const data = await res.json();
       // Response status check
@@ -79,6 +79,17 @@ const UserTable = () => {
       }
     } catch(err) {
       alert('Error occured during submit: ' + err);
+    }
+  }
+  // Increment view count of site
+  const handleViewCount = async (id) => {
+    const res = await fetch(`/api/links/user/views/${id}`, {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},
+    });
+
+    if(res.status !== 200) {
+      console.log('Error occured during update view count');
     }
   }
   
@@ -102,7 +113,7 @@ const UserTable = () => {
                       {row.name}
                     </TableCell>
                     <TableCell align="left">
-                      <Link href={row.link} target="_blank" rel="noopener" color='inherit' underline='none'>
+                      <Link href={row.link} target="_blank" rel="noopener" color='inherit' underline='none' onClick={() => handleViewCount(row._id)}>
                         {row.description} <br/>
                         {row.link}
                       </Link>

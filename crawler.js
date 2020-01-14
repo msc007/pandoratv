@@ -64,7 +64,7 @@ async function clien_crawler() {
         }
         //TODO: consider only parse post with image
         // Add to list only if hit is > x
-        if(post_hit > 23000 && titleLength === 3) {
+        if(post_hit > 20000 && titleLength === 3) {
           const post_url = 'https://www.clien.net' + $(this).find('a.list_subject').attr('href').replace('?type=recommend','');
           links.push(post_url);
         }
