@@ -1,10 +1,6 @@
-# React Express Starter Pack
+# PandoraTV
 
-> Create full stack apps with React and Express. Run your client and server with a single command. 
-
-### Redux Version
-This version does not include Redux
-[Click Here For Redux Version](https://github.com/bradtraversy/react_redux_express_starter) 
+> Web application for koreans living abroad.
 
 ## Quick Start
 

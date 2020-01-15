@@ -44,8 +44,17 @@ app.get('/api/trending', async (req, res) => {
   try {
     //TODO need to find better algorithm to sort
     //find({ created_at: { $gt: new Date(Date.now() - 24*60*60 * 1000) } }).sort({hits: -1}); // for last 24 hour
-    const posts = await Post.find({}).sort({ hits: -1, created_at: -1, }); // hits by descending order && newest
+    const posts = await Post.find({}).sort({created_at: -1, hits: -1 }); // hits by descending order && newest
     res.json(posts);
+  } catch(err) {
+    res.sendStatus(500).json({ errorMessage: err.message });
+  }  
+});
+// LIVETV
+app.get('/api/links/livetv', async (req, res) => {
+  try {
+    const links = await Link.find({ category: 'livetv' }).sort({ hits: -1 });
+    res.json(links);
   } catch(err) {
     res.sendStatus(500).json({ errorMessage: err.message });
   }  

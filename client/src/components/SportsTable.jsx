@@ -29,12 +29,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
+  cardActionArea: {
+    height: '100%'
+  }
 }));
 
 const SportsTable = () => {
@@ -76,7 +73,7 @@ const SportsTable = () => {
           </Grid>
         </Grid>
       </Container>
-      <Container className={classes.cardGrid} maxWidth="lg">
+      <Container className={classes.cardGrid} maxWidth="xlg">
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
           라이브 스포츠 스트리밍 사이트
         </Typography>
@@ -84,13 +81,8 @@ const SportsTable = () => {
           {rows.map(card => (
             <Grid item key={card.name} xs={12} sm={6} md={4} lg={3}>
               <Card className={classes.card}>
-                {/*<CardMedia
-                  className={classes.cardMedia}
-                  image="https://source.unsplash.com/random"
-                  title="Image title"
-                />*/}
-                <CardActionArea component='a' href={card.link} target='_blank' onClick={() => handleViewCount(card._id)}>
-                  <CardContent className={classes.cardContent}>
+                <CardActionArea className={classes.cardActionArea} component='a' href={card.link} target='_blank' onClick={() => handleViewCount(card._id)}>
+                  <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                       {card.name}
                     </Typography>
@@ -100,11 +92,8 @@ const SportsTable = () => {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary">
-                    View
-                  </Button>
-                  <Button size="small" color="primary">
-                    Edit
+                  <Button size="small" color="secondary">
+                    버그신고
                   </Button>
                 </CardActions>
               </Card>

@@ -22,9 +22,9 @@ const useStyles = makeStyles(theme => ({
   cardMedia: {
     paddingTop: '56.25%', // 16:9
   },
-  cardContent: {
-    flexGrow: 1,
-  },
+  cardActionArea: {
+    height: '100%'
+  }
 }));
 
 const TrendingPage = () => {
@@ -40,18 +40,18 @@ const TrendingPage = () => {
 
   return (
     <div className={classes.container}>
-       <Container maxWidth="lg">
+      <Container maxWidth="xlg">
         <Grid container spacing={4}>
           {rows.map(card => (
             <Grid item key={card.title} xs={12} sm={6} md={4} lg={3}>
               <Card className={classes.card}>
-                <CardActionArea component='a' href={`/contents/${card._id}`}>
+                <CardActionArea className={classes.cardActionArea} component='a' href={`/contents/${card._id}`}>
                   <CardMedia
                   className={classes.cardMedia}
                   image={card.img_urls[0]}
                   title={card.title}
                   />
-                  <CardContent className={classes.cardContent}>
+                  <CardContent>
                     <Typography gutterBottom variant="subtitle2">
                       {card.title}
                     </Typography>

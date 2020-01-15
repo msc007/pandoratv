@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from "react";
-import UserTable from './UserTable';
-// Mateiral-ui
+// Material-ui
 import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
 
 // Style
 const useStyles = makeStyles(theme => ({
-  root: {
+  container: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6, 0, 6),
-  },  
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    padding: theme.spacing(8, 0, 6),
+  },
+  buttonContainer: {
+    padding: theme.spacing(0, 0, 8),
   },
   card: {
     height: '100%',
@@ -31,14 +29,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-// Home functional Component
-const Home = () => {
+const LiveTvTable = () => {
   const classes = useStyles();
   // React hook initialize state and setter
   const [rows, setRows] = useState([]);
   // React hook replace component lifecyle method, empty array makes the effect run on first render.
   useEffect(() => {
-    fetch('/api/links/home')  // For production: https://pandoratv.tk/api/user"
+    fetch('/api/links/livetv')  // For production: https://pandoratv.tk/api/links"
       .then(res => res.json())
       .then(rows => setRows([...rows]));
   }, []);
@@ -53,25 +50,22 @@ const Home = () => {
       console.log('Error occured during update view count');
     }
   }
-
   return (
-    <div className={classes.root}>
+    <div className={classes.container}>
       <Container maxWidth="xlg">
-        <Typography variant="h5" align="center" color="textSecondary">
-          클릭수 상위 사이트
+        <Typography variant="h5" align="center" color="textSecondary" paragraph>
+          해외 한인 라이브 TV 시청 사이트
         </Typography>
-      </Container>
-     <Container className={classes.cardGrid} maxWidth="xlg">
         <Grid container spacing={4}>
           {rows.map(card => (
             <Grid item key={card.name} xs={12} sm={6} md={4} lg={3}>
               <Card className={classes.card}>
                 <CardActionArea className={classes.cardActionArea} component='a' href={card.link} target='_blank' onClick={() => handleViewCount(card._id)}>
-                  <CardContent>  
+                  <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                       {card.name}
                     </Typography>
-                    <Typography variant='body2'>
+                    <Typography>
                       {card.description}
                     </Typography>
                   </CardContent>
@@ -86,11 +80,8 @@ const Home = () => {
           ))}
         </Grid>
       </Container>
-      <Container maxWidth="xlg">
-        <UserTable />
-      </Container>
     </div>
   );
 }
 
-export default Home;
+export default LiveTvTable;

@@ -95,18 +95,24 @@ async function clien_crawler() {
           $('#div_content > div.post_view > div.post_content > article > div').children('p').each(function() {
             const img_url = $(this).children('img').attr('src');
             const out_link = $(this).find('.url').attr('src');
+            const gif_url = $(this).find('video').attr('poster');
 
             //TODO: consider crawl entire article by sanitize-html package or iconv-lite https://namunotebook.tistory.com/10
             // consider article way 
             if(img_url) {
               img_urls.push(img_url);
               //article.push({type: 'img', data: img_url});
+            } else if(gif_url) {
+              // TODO: consider handle .gif
             } else if(out_link) {
               text += `<a href='${out_link}' target='_blank'>${out_link}</a>` + '\n';
               //article.push({type: 'link', data: out_link})
             } else if($(this).text().trim() !== "") {
               text += $(this).text().trim() + '\n';
               //article.push({type: 'text', data: $(this).text().trim()});
+            } else {
+              // Case where text is not wrapped in <p></p>
+              text += $(this).text().trim() + '\n';
             }
           });
           // Create new post
@@ -134,7 +140,7 @@ async function clien_crawler() {
   }
 }
 
-//clien_crawler();
+//lien_crawler();
 
 
 
