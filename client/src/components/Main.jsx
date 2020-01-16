@@ -1,108 +1,185 @@
 import React from 'react';
-//mport Button from '@material-ui/core/Button';
-//import Card from '@material-ui/core/Card';
-//import CardActions from '@material-ui/core/CardActions';
-//import CardContent from '@material-ui/core/CardContent';
-//import CardMedia from '@material-ui/core/CardMedia';
-//import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import clsx from 'clsx';
+// Material-ui 
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Drawer from '@material-ui/core/Drawer';
+import DrawerList from './DrawerList';
+// Material-ui Icons
+import IconButton from '@material-ui/core/IconButton';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import MenuIcon from '@material-ui/icons/Menu';
+import LiveTvIcon from '@material-ui/icons/LiveTv';
+// Components
+import Home from './Home';
+import SportsTable from './SportsTable';
+import LiveTvTable from './LiveTvTable';
+import WebHardTable from './WebHardTable';
+import CommunityTable from './CommunityTable';
+import TrendingPage from './TrendingPage';
+import ContentPage from './ContentPage';
+import AboutPage from './AboutPage';
+import BoardPage from './BoardPage';
+import BoardWritePage from './BoardWritePage';
+import Footer from './Footer';
 
+// Style
+const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
-  heroContent: {
-    //backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  card: {
-    height: '100%',
+  root: {
     display: 'flex',
+  },
+  toolbar: {
+    paddingRight: 24, // keep right padding when drawer closed
+  },
+  toolbarIcon: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: '0 8px',
+    ...theme.mixins.toolbar,
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: 30,
+  },
+  menuButtonHidden: {
+    display: 'none',
+  },
+  title: {
+    flexGrow: 1,
+  },
+  drawerPaper: {
+    position: 'relative',
+    whiteSpace: 'nowrap',
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerPaperClose: {
+    overflowX: 'hidden',
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    width: theme.spacing(7),
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(9),
+    },
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
     flexDirection: 'column',
   },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
+  icon: {
+    marginRight: theme.spacing(2),
   },
-  cardContent: {
-    flexGrow: 1,
-  }
 }));
 
-//onst cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-export default function Album() {
+// Main Functional Component
+const Main = () => {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <main>
-      <div className={classes.heroContent}>
-        <Container maxWidth="sm">
-          {/*
-          
-          <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-            PandoraTV
-          </Typography>
-          */}
-
-          <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            안녕하세요 저희 PandoraTV는 해외 거주 한인분들의 좀더 원활한 스포츠 관람을 돕기위해 만들어졌습니다.
-            매번 구글에 검색하기 귀찮고 특정 사이트 버퍼링이 심하시다면 아래 목록에서 원활한 스트리밍 사이트를 찿아보세요! 
-          </Typography>
-          {/*
-          <div className={classes.heroButtons}>
-            <Grid container spacing={2} justify="center">
-              <Grid item>
-                <Button variant="contained" color="primary">
-                  Main call to action
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button variant="outlined" color="primary">
-                  Secondary action
-                </Button>
-              </Grid>
-            </Grid>
-          </div>*/}
-        </Container>
-      </div>
-      {/*
-      <Container className={classes.cardGrid} maxWidth="md">
-        <Grid container spacing={4}>
-          {cards.map(card => (
-            <Grid item key={card} xs={12} sm={6} md={4}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.cardMedia}
-                  image="https://source.unsplash.com/random"
-                  title="Image title"
-                />
-                <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Heading
-                  </Typography>
-                  <Typography>
-                    This is a media card. You can use this section to describe the content.
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    View
-                  </Button>
-                  <Button size="small" color="primary">
-                    Edit
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>*/}
-    </main>
+    <div className={classes.root}>
+      <Router>
+        {/* NAVIGATION BAR */}
+        <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+          <Toolbar className={classes.toolbar}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <LiveTvIcon className={classes.icon} />
+            <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+              PandoraTV
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        {/* LEFT SIDE DRAWER */}
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          }}
+          open={open}
+        >
+          <div className={classes.toolbarIcon}>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <DrawerList />
+        </Drawer>
+        {/* MAIN CONTENTS */}
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Container maxWidth="xl" className={classes.container}>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/trending" component={TrendingPage} />
+              <Route path="/board" exact component={BoardPage} />
+              <Route path='/board/write' component={BoardWritePage} />
+              <Route path="/sports" component={SportsTable} />
+              <Route path="/livetv" component={LiveTvTable} />
+              <Route path="/webhard" component={WebHardTable} />
+              <Route path="/community" component={CommunityTable} />
+              <Route path="/contents/:postId" component={ContentPage} />
+              <Route path="/about" component={AboutPage} />
+              <Route component={Home} /> 
+            </Switch>
+            {/* Footer */}
+            <Footer />
+          </Container>
+        </main>
+      </Router>
+    </div>
   );
 }
+
+export default Main;

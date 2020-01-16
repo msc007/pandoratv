@@ -1,40 +1,28 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+// Material-ui
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 
-const useStyles = makeStyles(theme => ({
-    footer: {
-      //backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(6),
-    },
-}));
 
-function Copyright() {
+// Footer Functional Component
+const Footer = () => {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="#">
-        pandoraTV.com
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
+    <Box pt={4}>
+      <Typography variant='body2' color='textSecondary' align='center'>
+        {'Copyright © '}
+        <Link color='inherit' component={RouterLink} to='/'>
+          PandoraTV
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {' | '}
+        <Link color='inherit' component={RouterLink} to='/about'>
+          About
+        </Link>{' '}
+      </Typography>
+    </Box>
   );
 }
 
-export default function Footer() {
-  const classes = useStyles();
-
-  return (
-    <footer className={classes.footer}>
-    <Typography variant="h6" align="center" gutterBottom>
-      PandoraTV
-    </Typography>
-    <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-        Something here to give the footer a purpose!
-    </Typography>
-    <Copyright />
-    </footer>
-  );
-}
+export default Footer;
