@@ -17,7 +17,7 @@ import CardContent from '@material-ui/core/CardContent';
 
 // Style
 const useStyles = makeStyles(theme => ({
-  container: {
+  root: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
   },
@@ -62,7 +62,7 @@ const SportsTable = () => {
   }
   // Render Contents
   return (
-    <div className={classes.container}>
+    <div className={classes.root}>
       <Container maxWidth='lg'>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={6} md={3} lg={3}>

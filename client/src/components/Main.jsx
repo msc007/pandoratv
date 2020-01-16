@@ -16,6 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import LiveTvIcon from '@material-ui/icons/LiveTv';
 // Components
 import Home from './Home';
+import UserTable from './UserTable';
 import SportsTable from './SportsTable';
 import LiveTvTable from './LiveTvTable';
 import WebHardTable from './WebHardTable';
@@ -169,6 +170,7 @@ const Main = () => {
               <Route path="/livetv" component={LiveTvTable} />
               <Route path="/webhard" component={WebHardTable} />
               <Route path="/community" component={CommunityTable} />
+              <Route path="/userlink" component={UserTable} />
               <Route path="/contents/:postId" component={ContentPage} />
               <Route path="/about" component={AboutPage} />
               <Route component={Home} /> 

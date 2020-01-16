@@ -15,6 +15,7 @@ import ForumIcon from '@material-ui/icons/Forum';
 import TrendingIcon from '@material-ui/icons/Whatshot';
 import SportsIcon from '@material-ui/icons/SportsSoccer';
 import MessageIcon from '@material-ui/icons/Message';
+import LinkIcon from '@material-ui/icons/Link';
 // DrawerList Functional Component
 const DrawerList = () => {
   const [active, setActive] = React.useState(useLocation().pathname);
@@ -70,6 +71,12 @@ const DrawerList = () => {
             <ForumIcon />
           </ListItemIcon>
           <ListItemText primary="미주 커뮤니티" />
+        </ListItem>
+        <ListItem button component={Link} to='/userlink' onClick={()=> setActive('/userlink')} selected={active === '/userlink' ? true : false}>
+          <ListItemIcon>
+            <LinkIcon />
+          </ListItemIcon>
+          <ListItemText primary="스포츠 라이브" />
         </ListItem>
       </List>
 

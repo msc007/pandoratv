@@ -90,9 +90,6 @@ const Home = () => {
           ))}
         </Grid>
       </Container>
-      <Container maxWidth="xl">
-        <UserTable />
-      </Container>
     </div>
   );
 }
