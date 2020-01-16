@@ -1,0 +1,276 @@
+{
+    "_id": {
+        "$oid": "5e1174b5fb68e53f3855514b"
+    },
+    "name": "neneTV",
+    "link": "http://www.nene365.com",
+    "description": "종합 스포츠 라이브 스트리밍",
+    "category": "sports",
+    "hits": {
+        "$numberInt": "11"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e1176adf0f1473f38ef7358"
+    },
+    "name": "spoTV",
+    "link": "http://www.spotv365.com",
+    "description": "종합 스포츠 라이브 스트리밍",
+    "category": "sports",
+    "hits": {
+        "$numberInt": "1"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e1176e2f0f1473f38ef7359"
+    },
+    "name": "만수TV",
+    "link": "http://www.mstv24.com",
+    "description": "종합 스포츠 라이브 스트리밍",
+    "category": "sports",
+    "hits": {
+        "$numberInt": "2"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e1176f4f0f1473f38ef735a"
+    },
+    "name": "coolTV",
+    "link": "http://www.cool-365.com",
+    "description": "종합 스포츠 라이브 스트리밍",
+    "category": "sports",
+    "hits": {
+        "$numberInt": "0"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e11770df0f1473f38ef735b"
+    },
+    "name": "bestTV",
+    "link": "http://www.besttv365.com",
+    "description": "종합 스포츠 라이브 스트리밍",
+    "category": "sports",
+    "hits": {
+        "$numberInt": "0"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e11a3bbf0f1473f38ef735c"
+    },
+    "name": "한인디스크",
+    "link": "http://www.hanindisk.com",
+    "description": "미주 한입 웹하드",
+    "category": "webhard",
+    "hits": {
+        "$numberInt": "1"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e11a3e9f0f1473f38ef735d"
+    },
+    "name": "키위디스크",
+    "link": "http://www.kiwidisk.com",
+    "description": "미주 한입 웹하드",
+    "category": "webhard",
+    "hits": {
+        "$numberInt": "1"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e11a3fff0f1473f38ef735e"
+    },
+    "name": "USA디스크",
+    "link": "http://www.usadisk.com",
+    "description": "미주 한입 웹하드",
+    "category": "webhard",
+    "hits": {
+        "$numberInt": "0"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e11a488f0f1473f38ef735f"
+    },
+    "name": "라디오코리아",
+    "link": "http://www.radioKorea.com",
+    "description": "미주 한입 종합 커뮤니티",
+    "category": "community",
+    "hits": {
+        "$numberInt": "0"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e11a4baf0f1473f38ef7360"
+    },
+    "name": "미씨USA",
+    "link": "http://www.missyusa.com",
+    "description": "미주 최대 여성 커뮤니티",
+    "category": "community",
+    "hits": {
+        "$numberInt": "1"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e11a4daf0f1473f38ef7361"
+    },
+    "name": "미즈빌",
+    "link": "http://www.mizville.org",
+    "description": "미주 한인 주부 커뮤니티",
+    "category": "community",
+    "hits": {
+        "$numberInt": "0"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e11a4fdf0f1473f38ef7362"
+    },
+    "name": "미씨쿠폰",
+    "link": "http://www.missycoupons.com",
+    "description": "미주 각종 쇼핑/활인 정보",
+    "category": "community",
+    "hits": {
+        "$numberInt": "0"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e11a521f0f1473f38ef7363"
+    },
+    "name": "중앙일보",
+    "link": "http://www.koreadaily.com",
+    "description": "미주 중앙일보",
+    "category": "community",
+    "hits": {
+        "$numberInt": "0"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e11a53ff0f1473f38ef7364"
+    },
+    "name": "한국일보",
+    "link": "http://www.koreatimes.com",
+    "description": "미주 한국일보",
+    "category": "community",
+    "hits": {
+        "$numberInt": "0"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e1d8092f0f1473f38ef7366"
+    },
+    "name": "RealTimeTV",
+    "link": "https://realtimetv.net/",
+    "description": "해외 거주민들을 위한 한인 라이브 TV",
+    "category": "livetv",
+    "hits": {
+        "$numberInt": "6"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e1d80b4f0f1473f38ef7367"
+    },
+    "name": "쿠쿠티비",
+    "link": "https://iqooqootv.com",
+    "description": "해외 거주민들을 위한 한인 라이브 TV",
+    "category": "livetv",
+    "hits": {
+        "$numberInt": "8"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e1d8271f0f1473f38ef7368"
+    },
+    "name": "다프리TV",
+    "link": "https://j22.hitjjal.com/",
+    "description": "해외 거주민들을 위한 한인 라이브 TV",
+    "category": "livetv",
+    "hits": {
+        "$numberInt": "3"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e1d8283f0f1473f38ef7369"
+    },
+    "name": "티비나와",
+    "link": "https://www.tv-nawa.club/",
+    "description": "해외 거주민들을 위한 한인 라이브 TV",
+    "category": "livetv",
+    "hits": {
+        "$numberInt": "5"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e1d85acf0f1473f38ef736a"
+    },
+    "name": "SinkTV",
+    "link": "http://www.sinktv.com/",
+    "description": "해외 거주민들을 위한 한인 라이브 TV",
+    "category": "livetv",
+    "hits": {
+        "$numberInt": "1"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e1d86c1f0f1473f38ef736b"
+    },
+    "name": "온디맨드코리아",
+    "link": "https://www.ondemandkorea.com/",
+    "description": "합벅적 한국의 방송 콘텐츠, 영화와 K-POP 스트리밍 서비스",
+    "category": "livetv",
+    "hits": {
+        "$numberInt": "9"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e1d870af0f1473f38ef736c"
+    },
+    "name": "Viki",
+    "link": "https://www.viki.com/",
+    "description": "합법적 아시아 드라마, 영화, 예능 컨텐츠 스트리밍 서비스",
+    "category": "livetv",
+    "hits": {
+        "$numberInt": "7"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e1d89d0f0f1473f38ef736d"
+    },
+    "name": "동영상닷컴",
+    "link": "https://dongyoungsang.club/dr/3266703",
+    "description": "구 baykoreans.net, 한국 드라마, 예능, 영화 스트리밍 사이트 ",
+    "category": "livetv",
+    "hits": {
+        "$numberInt": "1"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e1d8a1bf0f1473f38ef736e"
+    },
+    "name": "RedSpotTV",
+    "link": "https://redspot.tv/",
+    "description": "한국 드라마, 예능, 영화 스트리밍 사이트 ",
+    "category": "livetv",
+    "hits": {
+        "$numberInt": "1"
+    }
+}

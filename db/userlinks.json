@@ -1,0 +1,30 @@
+{
+    "_id": {
+        "$oid": "5e1458879dc4912794197cba"
+    },
+    "name": "test3",
+    "link": "http://test.com",
+    "description": "sfla",
+    "category": "test",
+    "hits": {
+        "$numberInt": "2"
+    },
+    "__v": {
+        "$numberInt": "0"
+    }
+}
+{
+    "_id": {
+        "$oid": "5e145d1f28f0dd03f44752e3"
+    },
+    "name": "example",
+    "link": "https://www.example.com",
+    "description": "examplj",
+    "category": "test",
+    "hits": {
+        "$numberInt": "3"
+    },
+    "__v": {
+        "$numberInt": "0"
+    }
+}
