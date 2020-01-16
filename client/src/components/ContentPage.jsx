@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import CommentList from './CommentList';
+import Loading from './Loading';
 // Material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -21,7 +22,7 @@ const ContentPage = () => {
   const { postId } = useParams();
   const classes = useStyles();
   // React hook initialize state and setter
-  const [post, setPost] = useState("");
+  const [post, setPost] = useState('');
   const[images, setImages] = useState([]);
   // React hook replace component lifecyle method, empty array makes the effect run on first render.
   useEffect(() => {
@@ -33,6 +34,11 @@ const ContentPage = () => {
       });
   }, [postId]);
 
+  // Loading Spinner
+  if(post === '') {
+    return <Loading/>;
+  }
+  // Render Contents
   return (
     <div className={classes.root}>
       <Container maxWidth="md">

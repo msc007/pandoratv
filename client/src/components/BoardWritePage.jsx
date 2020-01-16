@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 // Mateiral-ui
 import { makeStyles } from '@material-ui/core/styles';
 
-
-
-
 // Style
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,7 +25,7 @@ const BoardPage = () => {
 
   return (
     <div className={classes.root}>
-            write page
+      TODO
     </div>
   );
 }

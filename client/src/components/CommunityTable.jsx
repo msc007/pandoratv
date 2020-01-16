@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Loading from './Loading'
 // Material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -51,9 +52,14 @@ const CommunityTable = () => {
       console.log('Error occured during update view count');
     }
   }
+  // Loading Spinner
+  if(rows.length === 0) {
+    return <Loading/>;
+  }
+  // Render Contents
   return (
     <div className={classes.container}>
-       <Container maxWidth="xlg">
+       <Container maxWidth="xl">
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
           미주 한인 커뮤니티 사이트
         </Typography>

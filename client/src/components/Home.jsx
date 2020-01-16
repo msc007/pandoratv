@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UserTable from './UserTable';
+import Loading from './Loading';
 // Mateiral-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -30,7 +31,6 @@ const useStyles = makeStyles(theme => ({
     height: '100%'
   }
 }));
-
 // Home functional Component
 const Home = () => {
   const classes = useStyles();
@@ -53,15 +53,19 @@ const Home = () => {
       console.log('Error occured during update view count');
     }
   }
-
+  // Loading Spinner
+  if(rows.length === 0) {
+    return <Loading/>;
+  }
+  // Render Contents
   return (
     <div className={classes.root}>
-      <Container maxWidth="xlg">
+      <Container maxWidth="xl">
         <Typography variant="h5" align="center" color="textSecondary">
           클릭수 상위 사이트
         </Typography>
       </Container>
-     <Container className={classes.cardGrid} maxWidth="xlg">
+     <Container className={classes.cardGrid} maxWidth="xl">
         <Grid container spacing={4}>
           {rows.map(card => (
             <Grid item key={card.name} xs={12} sm={6} md={4} lg={3}>
@@ -86,7 +90,7 @@ const Home = () => {
           ))}
         </Grid>
       </Container>
-      <Container maxWidth="xlg">
+      <Container maxWidth="xl">
         <UserTable />
       </Container>
     </div>

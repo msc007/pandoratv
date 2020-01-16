@@ -11,12 +11,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <React.Fragment>
-          <CssBaseline />
-          <ThemeProvider theme={theme}>
-            <Main />
-          </ThemeProvider>
-        </React.Fragment>
+        <CssBaseline />
+        <ThemeProvider theme={theme}>
+          <Main />
+        </ThemeProvider>
       </div>
     );
   }

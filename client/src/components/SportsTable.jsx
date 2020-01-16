@@ -3,6 +3,7 @@ import StandingModal from './StandingModal';
 import NextMatchModal from './NextMatchModal';
 import PremierScheduleModal from './PremierScheduleModal';
 import SonModal from './SonModal';
+import Loading from './Loading';
 // Material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -55,6 +56,11 @@ const SportsTable = () => {
       console.log('Error occured during update view count');
     }
   }
+  // Loading Spinner
+  if(rows.length === 0) {
+    return <Loading/>;
+  }
+  // Render Contents
   return (
     <div className={classes.container}>
       <Container maxWidth='lg'>
@@ -73,7 +79,7 @@ const SportsTable = () => {
           </Grid>
         </Grid>
       </Container>
-      <Container className={classes.cardGrid} maxWidth="xlg">
+      <Container className={classes.cardGrid} maxWidth="xl">
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
           라이브 스포츠 스트리밍 사이트
         </Typography>

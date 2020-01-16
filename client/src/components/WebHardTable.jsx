@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import Loading from './Loading';
 // Material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -50,9 +51,13 @@ const WebHardTable = () => {
       console.log('Error occured during update view count');
     }
   }
+  // Loading Spinner
+  if(rows.length === 0) {
+    return <Loading/>;
+  }
   return (
     <div className={classes.container}>
-      <Container maxWidth="xlg">
+      <Container maxWidth="xl">
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
           미주 한인 웹하드
         </Typography>

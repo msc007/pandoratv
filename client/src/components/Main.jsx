@@ -159,7 +159,7 @@ const Main = () => {
         {/* MAIN CONTENTS */}
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Container maxWidth="xlg" className={classes.container}>
+          <Container maxWidth="xl" className={classes.container}>
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/trending" component={TrendingPage} />
