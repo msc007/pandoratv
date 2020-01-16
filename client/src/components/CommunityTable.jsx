@@ -37,13 +37,13 @@ const CommunityTable = () => {
   const [rows, setRows] = useState([]);
   // React hook replace component lifecyle method, empty array makes the effect run on first render.
   useEffect(() => {
-    fetch('/api/links/community')  // For production: https://pandoratv.tk/api/links"
+    fetch('https://pandoratv.tk/api/links/community')  // For production: https://pandoratv.tk/api/links/community"
       .then(res => res.json())
       .then(rows => setRows([...rows]));
   }, []);
   // Increment view count of site
   const handleViewCount = async (id) => {
-    const res = await fetch(`/api/links/views/${id}`, {
+    const res = await fetch(`https://pandoratv.tk/api/links/views/${id}`, {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
     });

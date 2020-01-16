@@ -9,9 +9,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
-
-
-
+// Style
 const useStyles = makeStyles(theme => ({
   container: {
     backgroundColor: theme.palette.background.paper,
@@ -36,7 +34,7 @@ const TrendingPage = () => {
   const [rows, setRows] = useState([]);
   // React hook replace component lifecyle method, empty array makes the effect run on first render.
   useEffect(() => {
-    fetch('/api/trending')  // For production: https://pandoratv.tk/api/links"
+    fetch('https://pandoratv.tk/api/trending')  // For production: https://pandoratv.tk/api/links"
       .then(res => res.json())
       .then(rows => setRows([...rows]));
   }, []);

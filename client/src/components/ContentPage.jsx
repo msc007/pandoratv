@@ -26,7 +26,7 @@ const ContentPage = () => {
   const[images, setImages] = useState([]);
   // React hook replace component lifecyle method, empty array makes the effect run on first render.
   useEffect(() => {
-    fetch(`/api/posts/${postId}`)  // For production: https://pandoratv.tk/api/user"
+    fetch(`https://pandoratv.tk/api/posts/${postId}`)  // For production: https://pandoratv.tk/api/user"
       .then(res => res.json())
       .then(post => {
         setPost(post);
