@@ -52,13 +52,14 @@ const UserTableModal = (props) => {
       if(res.status === 500) {
         return alert('Unexpected error occured, please try again later');
       }
+      // Alert rate limit error message
+      if(res.status === 429) {
+        alert(data.limitErrorMessage);
+        return setOpen(false);
+      }
       // Input validation check
       if(data.validationMessage) {
         return alert(data.validationMessage);
-      }
-      // Alert rate limit error message
-      if(data.limitErrorMessage) {
-        return alert(data.limitErrorMessage);
       }
       // Rerender on successful save and close modal
       if(res.status === 200) {

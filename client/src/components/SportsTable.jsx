@@ -4,6 +4,7 @@ import NextMatchModal from './NextMatchModal';
 import PremierScheduleModal from './PremierScheduleModal';
 import SonModal from './SonModal';
 import Loading from './Loading';
+import BugReportButton from './BugReportButton';
 // Material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -19,11 +20,10 @@ import CardContent from '@material-ui/core/CardContent';
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
+    padding: theme.spacing(0, 0, 6),
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    paddingTop: theme.spacing(4),
   },
   card: {
     height: '100%',
@@ -63,7 +63,7 @@ const SportsTable = () => {
   // Render Contents
   return (
     <div className={classes.root}>
-      <Container maxWidth='lg'>
+      <Container maxWidth='xl'>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={6} md={3} lg={3}>
             <StandingModal />
@@ -98,9 +98,7 @@ const SportsTable = () => {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="secondary">
-                    버그신고
-                  </Button>
+                  <BugReportButton siteName={card.name} id={card._id} />
                 </CardActions>
               </Card>
             </Grid>

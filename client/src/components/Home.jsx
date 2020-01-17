@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UserTable from './UserTable';
 import Loading from './Loading';
+import BugReportButton from './BugReportButton';
 // Mateiral-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -11,16 +12,16 @@ import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-
 // Style
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6, 0, 6),
+    padding: theme.spacing(0, 0, 6),
+    height: '100%',
+
   },  
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    paddingTop: theme.spacing(4),
   },
   card: {
     height: '100%',
@@ -81,9 +82,7 @@ const Home = () => {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="secondary">
-                    버그신고
-                  </Button>
+                  <BugReportButton siteName={card.name} id={card._id} />
                 </CardActions>
               </Card>
             </Grid>

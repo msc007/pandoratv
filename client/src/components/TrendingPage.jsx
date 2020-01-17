@@ -10,12 +10,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 
-
-
 const useStyles = makeStyles(theme => ({
-  container: {
+  root: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
+    padding: theme.spacing(0, 0, 6),
   },
   card: {
     height: '100%',
@@ -46,7 +44,7 @@ const TrendingPage = () => {
   }
   // Render Contents
   return (
-    <div className={classes.container}>
+    <div className={classes.root}>
       <Container maxWidth="xl">
         <Grid container spacing={4}>
           {rows.map(card => (

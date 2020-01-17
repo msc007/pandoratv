@@ -95,8 +95,8 @@ const useStyles = makeStyles(theme => ({
     overflow: 'auto',
   },
   container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(4, 0, 4),
   },
   paper: {
     padding: theme.spacing(2),
@@ -106,7 +106,7 @@ const useStyles = makeStyles(theme => ({
   },
   icon: {
     marginRight: theme.spacing(2),
-  },
+  },  
 }));
 
 // Main Functional Component

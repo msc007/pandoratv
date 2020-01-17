@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Loading from './Loading';
+import BugReportButton from './BugReportButton';
 // Material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,12 +13,9 @@ import Grid from '@material-ui/core/Grid';
 
 // Style
 const useStyles = makeStyles(theme => ({
-  container: {
+  root: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  buttonContainer: {
-    padding: theme.spacing(0, 0, 8),
+    padding: theme.spacing(0, 0, 6),
   },
   card: {
     height: '100%',
@@ -56,8 +53,8 @@ const WebHardTable = () => {
     return <Loading/>;
   }
   return (
-    <div className={classes.container}>
-      <Container maxWidth="xl">
+    <div className={classes.root}>
+      <Container maxWidth='xl'>
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
           미주 한인 웹하드
         </Typography>
@@ -76,9 +73,7 @@ const WebHardTable = () => {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="secondary">
-                    버그신고
-                  </Button>
+                  <BugReportButton siteName={card.name} id={card._id} />
                 </CardActions>
               </Card>
             </Grid>

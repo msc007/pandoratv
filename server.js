@@ -22,12 +22,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 /****** RATE LIMIT******/
-const  addLinkLimiter = rateLimit({
+const addLinkLimiter = rateLimit({
   // status code 429 will be returned when 'max' exceeded
-  windowMs: 10 * 60 * 1000, // 10 minutes
-  max: 1,
-  message: { limitErrorMessage: 'Too many request made from this IP, please try again after 10 minutes' },
-  statusCode: 200, // default is status 429 which will be caught by catch block.
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 5,
+  message: { limitErrorMessage: 'Too many request made from this IP, please try again after 1 hour' },
+});
+const bugReportLimiter = rateLimit({
+  // status code 429 will be returned when 'max' exceeded
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 5,
+  message: { limitErrorMessage: 'Too many request made from this IP, please try again after 1 hour' },
 });
 
 /****** DB CONNECTION *******/
@@ -158,6 +163,29 @@ app.patch('/api/links/views/:siteId', async (req, res) => {
     res.sendStatus(500).json({ errorMessage: err.message });
   }  
 });
+// Increment bug count of User sites
+app.patch('/api/links/bug/:siteId', bugReportLimiter, async (req, res) => {
+  try {
+    // TODO: Consider merge UserLink and Link model
+    const data = await Link.findByIdAndUpdate({ _id: req.params.siteId }, { $inc: { bugCount: 1} });
+    //If it's not from link update UserLink
+    if(!data)
+      await UserLink.findByIdAndUpdate({ _id: req.params.siteId }, { $inc: { bugCount: 1} });
+
+    res.status(200).json();
+  } catch(err) {
+    res.sendStatus(500).json({ errorMessage: err.message });
+  }  
+});
+
+/*
+function main(){
+  Link.updateMany({}, { $set: {bugCount: 0} }, {upsert: true }).then((res,err) =>{
+    console.log(res);
+  });
+main();
+}
+*/
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${ PORT }`));

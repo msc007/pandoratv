@@ -8,7 +8,8 @@ const LinkSchema = new Schema({
   link: String,
   description: String,
   category: String,
-  hits: Number,
+  hits: { type: Number, default: 0 },
+  bugCount: { type: Number, default: 0 },
 });
 
 /*
