@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const validator = require('validator');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
+const rateLimit = require('express-rate-limit');
 const app = express();
 // Modal Schema
 const Link = require('./models/Link');
@@ -19,6 +20,15 @@ if( ENV === 'production') {
 app.use(helmet());  // For security: consider csurf package later on
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+/****** RATE LIMIT******/
+const  addLinkLimiter = rateLimit({
+  // status code 429 will be returned when 'max' exceeded
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 1,
+  message: { limitErrorMessage: 'Too many request made from this IP, please try again after 10 minutes' },
+  statusCode: 200, // default is status 429 which will be caught by catch block.
+});
 
 /****** DB CONNECTION *******/
 const db = process.env.MONGO_URI;
@@ -104,7 +114,7 @@ app.get('/api/links/user', async (req, res) => {
     res.sendStatus(500).json({ errorMessage: err.message });
   }  
 });
-app.post('/api/links/user', async (req, res) => {
+app.post('/api/links/user', addLinkLimiter, async (req, res) => {
   try {
     // Serverside input validation
     if(!validator.isURL(req.body.siteLink, { require_tld: true, require_protocol: true }) ||

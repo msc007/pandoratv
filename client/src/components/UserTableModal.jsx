@@ -49,12 +49,16 @@ const UserTableModal = (props) => {
       });
       const data = await res.json();
       // Response status check
-      if(res.status === 500){
+      if(res.status === 500) {
         return alert('Unexpected error occured, please try again later');
       }
       // Input validation check
       if(data.validationMessage) {
         return alert(data.validationMessage);
+      }
+      // Alert rate limit error message
+      if(data.limitErrorMessage) {
+        return alert(data.limitErrorMessage);
       }
       // Rerender on successful save and close modal
       if(res.status === 200) {

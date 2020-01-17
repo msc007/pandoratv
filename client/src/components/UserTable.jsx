@@ -65,7 +65,6 @@ const UserTable = () => {
   // Render Contents
   return (
     <div className={classes.root}>
-      <UserTableModal rows={rows} setRows={setRows}/>
       <Container maxWidth="xl">
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
           유저 등록 채널
@@ -94,6 +93,7 @@ const UserTable = () => {
           ))}
         </Grid>
       </Container>
+      <UserTableModal rows={rows} setRows={setRows}/>
     </div>
   );
 }
