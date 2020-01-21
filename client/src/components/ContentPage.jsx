@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import CommentList from './CommentList';
+import CommentSection from './CommentSection';
 import Loading from './Loading';
 // Material-ui
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,7 +23,7 @@ const ContentPage = () => {
   const classes = useStyles();
   // React hook initialize state and setter
   const [post, setPost] = useState('');
-  const[images, setImages] = useState([]);
+  const [images, setImages] = useState([]);
   // React hook replace component lifecyle method, empty array makes the effect run on first render.
   useEffect(() => {
     fetch(`/api/posts/${postId}`)  // For production: https://pandoratv.tk/api/user"
@@ -41,7 +41,7 @@ const ContentPage = () => {
   // Render Contents
   return (
     <div className={classes.root}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Typography variant="h5" align="center" color="textPrimary" gutterBottom>
           {post.title}
         </Typography>   
@@ -62,7 +62,7 @@ const ContentPage = () => {
           <EnterIcon />
         </Button>
         {/* COMMENTS */}
-        <CommentList/>
+        <CommentSection postId={postId}/>
       </Container>     
     </div>
   );

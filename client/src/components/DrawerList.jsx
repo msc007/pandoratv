@@ -14,7 +14,7 @@ import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import ForumIcon from '@material-ui/icons/Forum';
 import TrendingIcon from '@material-ui/icons/Whatshot';
 import SportsIcon from '@material-ui/icons/SportsSoccer';
-import MessageIcon from '@material-ui/icons/Message';
+// import MessageIcon from '@material-ui/icons/Message';
 import LinkIcon from '@material-ui/icons/Link';
 // DrawerList Functional Component
 const DrawerList = () => {
@@ -37,12 +37,14 @@ const DrawerList = () => {
             </ListItemIcon>
             <ListItemText primary="트렌딩" />
           </ListItem>
+          {/*
           <ListItem button component={Link} to='/board' onClick={()=> setActive('/board')} selected={active === '/board' ? true : false}> 
             <ListItemIcon>
               <MessageIcon />
             </ListItemIcon>
             <ListItemText primary="게시판" />
           </ListItem>
+          */}
         </List>
       <Divider />     
       {/* SECONDARY */}
@@ -76,7 +78,7 @@ const DrawerList = () => {
           <ListItemIcon>
             <LinkIcon />
           </ListItemIcon>
-          <ListItemText primary="스포츠 라이브" />
+          <ListItemText primary="유저 등록" />
         </ListItem>
       </List>
 

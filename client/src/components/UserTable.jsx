@@ -17,12 +17,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(0, 0, 6),
-  },  
-  table: {	
-    width: '100%',
-    minHeight: 400,
-    maxHeight: 400,
-    overflow: 'auto',
   },
   card: {
     height: '100%',

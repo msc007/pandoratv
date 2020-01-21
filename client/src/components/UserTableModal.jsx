@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 const UserTableModal = (props) => {
   const classes = useStyles();
   const { rows, setRows } = props;
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [siteName, setSiteName] = useState('');
   const [siteLink, setSiteLink] = useState('');
   const [siteDescription, setSiteDescription] = useState('');

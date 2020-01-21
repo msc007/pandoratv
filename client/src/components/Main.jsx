@@ -24,8 +24,8 @@ import CommunityTable from './CommunityTable';
 import TrendingPage from './TrendingPage';
 import ContentPage from './ContentPage';
 import AboutPage from './AboutPage';
-import BoardPage from './BoardPage';
-import BoardWritePage from './BoardWritePage';
+//import BoardPage from './BoardPage';
+//import BoardWritePage from './BoardWritePage';
 import Footer from './Footer';
 
 // Style
@@ -164,8 +164,9 @@ const Main = () => {
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/trending" component={TrendingPage} />
-              <Route path="/board" exact component={BoardPage} />
+              {/*<Route path="/board" exact component={BoardPage} />
               <Route path='/board/write' component={BoardWritePage} />
+              */}
               <Route path="/sports" component={SportsTable} />
               <Route path="/livetv" component={LiveTvTable} />
               <Route path="/webhard" component={WebHardTable} />
