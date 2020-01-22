@@ -47,7 +47,7 @@ const TrendingPage = () => {
     <div className={classes.root}>
       <Container maxWidth="xl">
         <Grid container spacing={4}>
-          {rows.map(card => (
+          {rows.map((card, index) => (
             <Grid item key={card.title} xs={12} sm={6} md={4} lg={3}>
               <Card className={classes.card}>
                 <CardActionArea className={classes.cardActionArea} component='a' href={`/contents/${card._id}`}>

@@ -1,5 +1,5 @@
-import React, { useState }from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect }from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
@@ -7,7 +7,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%",
+    width: '100%',
     backgroundColor: theme.palette.background.paper,
     paddingTop: theme.spacing(6),
   },
@@ -23,6 +23,22 @@ const ReplyButton = (props) => {
   const [passwordInput, setPasswordInput] = useState('');
   const [replyOpen, setReplyOpen] = useState(false);
   const [replyInput, setReplyInput] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [replyError, setReplyError] = useState('');
+  // Password validation
+  useEffect(() => {
+    if(passwordInput.length > 10)
+      setPasswordError('10 글자 이내');
+    else
+      setPasswordError('');
+  },[passwordInput]);
+// Comment validation
+  useEffect(() => {
+    if(replyInput.length > 300)
+      setReplyError('300 글자 이내');
+    else
+      setReplyError('');
+  },[replyInput]);
   const handleOpen = () => {
     setReplyOpen(true);
   };
@@ -72,14 +88,14 @@ const ReplyButton = (props) => {
         <Button color='primary' onClick={handleOpen}>댓글달기 </Button>
       </Box>
       {replyOpen ? 
-        <Box pl={12}>
-          <form component='span' className={classes.form} onSubmit={handleSubmit} autoComplete="off">
-            <TextField label="비밀번호" value={passwordInput} onChange={handleChangePassword}/>
-            <TextField id="standard-multiline-flexible" label="댓글 달기..." multiline rowsMax={4} value={replyInput} onChange={handleChangeReply} fullWidth/>
-            <Box display="flex" flexDirection="row-reverse" p={1} m={1} bgcolor="background.paper">
+        <Box pl={9}>
+          <form component='span' className={classes.form} onSubmit={handleSubmit} autoComplete='off'>
+            <TextField label='비밀번호' type='password' value={passwordInput} onChange={handleChangePassword} error={passwordError !== ''} helperText={passwordError} />
+            <TextField id='standard-multiline-flexible' label='댓글 달기...' multiline rowsMax={4} value={replyInput} onChange={handleChangeReply} error={replyError !== ''} helperText={replyError} fullWidth/>
+            <Box display='flex' flexDirection='row-reverse' p={1} m={1} bgcolor='background.paper'>
               <ButtonGroup color='primary'>
                 <Button type='button' variant='outlined' onClick={handleCancel}>취소</Button>
-                <Button type='submit' variant='contained' disabled={replyInput === '' || passwordInput === ''}>댓글</Button>
+                <Button type='submit' variant='contained' disabled={replyInput === '' || passwordInput === '' || passwordError || replyError }>댓글</Button>
               </ButtonGroup>
             </Box>
           </form>

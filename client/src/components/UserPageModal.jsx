@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 // UserTableModal Functional Component with props
-const UserTableModal = (props) => {
+const UserPageModal = (props) => {
   const classes = useStyles();
   const { rows, setRows } = props;
   const [open, setOpen] = useState(false);
@@ -121,4 +121,4 @@ const UserTableModal = (props) => {
   );
 }
 
-export default UserTableModal;
+export default UserPageModal;

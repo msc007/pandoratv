@@ -16,12 +16,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import LiveTvIcon from '@material-ui/icons/LiveTv';
 // Components
 import Home from './Home';
-import UserTable from './UserTable';
-import SportsTable from './SportsTable';
-import LiveTvTable from './LiveTvTable';
-import WebHardTable from './WebHardTable';
-import CommunityTable from './CommunityTable';
-import TrendingPage from './TrendingPage';
+import UserPage from './UserPage';
+import SportsPage from './SportsPage';
+import LiveTvPage from './LiveTvPage';
+import WebHardPage from './WebHardPage';
+import CommunityPage from './CommunityPage';
+//import TrendingPage from './TrendingPage';
+import TrendingPage2 from './TrendingPage2';
 import ContentPage from './ContentPage';
 import AboutPage from './AboutPage';
 //import BoardPage from './BoardPage';
@@ -163,15 +164,15 @@ const Main = () => {
           <Container maxWidth="xl" className={classes.container}>
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/trending" component={TrendingPage} />
+              <Route path="/trending" component={TrendingPage2} />
               {/*<Route path="/board" exact component={BoardPage} />
               <Route path='/board/write' component={BoardWritePage} />
               */}
-              <Route path="/sports" component={SportsTable} />
-              <Route path="/livetv" component={LiveTvTable} />
-              <Route path="/webhard" component={WebHardTable} />
-              <Route path="/community" component={CommunityTable} />
-              <Route path="/userlink" component={UserTable} />
+              <Route path="/sports" component={SportsPage} />
+              <Route path="/livetv" component={LiveTvPage} />
+              <Route path="/webhard" component={WebHardPage} />
+              <Route path="/community" component={CommunityPage} />
+              <Route path="/userlink" component={UserPage} />
               <Route path="/contents/:postId" component={ContentPage} />
               <Route path="/about" component={AboutPage} />
               <Route component={Home} /> 

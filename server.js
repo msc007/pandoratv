@@ -44,22 +44,20 @@ mongoose
   .catch(err => console.log('Failed to connect: ', err));
 
 /****** RESTful APIs *******/
-
 // Get replies
 app.get('/api/replies/:commentId', async (req,res) => {
 
   try {
-    const comments = await Comment.find({ parentId: req.params.commentId });
+    const comments = await Comment.find({ parentId: req.params.commentId }).sort({date: 1});
     res.status(200).json({ comments: comments });
   } catch(err) {
     res.status(500).json({ errorMessage: err.message });
   }
 });
-// Get post comments
+// Get only comments; no replies
 app.get('/api/comments/:postId', async (req,res) => {
-
   try {
-    const comments = await Comment.find({ postId: req.params.postId, parentId: null });
+    const comments = await Comment.find({ postId: req.params.postId, parentId: null }).sort({date: 1});
     //console.log(comments);
     res.status(200).json({ comments: comments });
   } catch(err) {
@@ -96,28 +94,14 @@ app.get('/api/posts/:postId', async (req, res) => {
     res.status(500).json({ errorMessage: err.message });
   }  
 });
-/* add comment to post
-app.post('/api/posts/:postId', async (req, res) => {
-  try {
-    console.log(req.body.comment);
-    const post = await Post.findByIdAndUpdate({ _id: req.params.postId }, 
-      { $push: { comments: {  userId: req.body.userId, 
-                              password: req.body.password,
-                              comment: req.body.comment,
-                              date: req.body.date  }}}); 
-    if(post)
-      res.status(200).json({ comments: post.comments});
-
-  } catch(err) {
-    res.status(500).json({ errorMessage: err.message });
-  }
-});*/
 // TRENDING
-app.get('/api/trending', async (req, res) => {
+app.get('/api/trending/:pageNumber', async (req, res) => {
   try {
+    const perPage = 16;
+    const pageNumber = req.params.pageNumber;
     //TODO need to find better algorithm to sort
-    //find({ created_at: { $gt: new Date(Date.now() - 24*60*60 * 1000) } }).sort({hits: -1}); // for last 24 hour
-    const posts = await Post.find({}).sort({created_at: -1, hits: -1 }); // hits by descending order && newest
+    //const posts = await Post.find({}).sort({created_at: -1, hits: -1 }); // hits by descending order && newest
+    const posts = await Post.find({}).sort({created_at: -1, hits: -1 }).limit(16).skip(perPage * pageNumber);
     res.json(posts);
   } catch(err) {
     res.status(500).json({ errorMessage: err.message });

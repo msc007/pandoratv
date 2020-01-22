@@ -34,6 +34,21 @@ mongoose
 //이토
 //웃대
 
+  /* NOTE ABOUT CRON:
+  * Second(0-59)
+  * Minute(0-59)
+  * Hour(0-23)
+  * Day(1-31)
+  * Month(1-12)
+  * Day of Week(0-7) 0 and 7 is sunday
+  */
+
+  //cron.schedule('0 0 */1 * * *', () => {
+  //  time = new Date();
+  //  main();
+  //  console.log('\nScheduled task running every hour at 0 second and 0 minute.');
+  //});
+
 // CLIEN
 async function clien_crawler() {
   try {

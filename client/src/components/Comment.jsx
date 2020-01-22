@@ -6,6 +6,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import ReplyButton from './ReplyButton';
+//import ViewRepliesButton from './ViewRepliesButton';
 //import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles(theme => ({
@@ -19,7 +20,8 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(4),
   },
   newline: {
-    whiteSpace: 'pre-wrap'  // For newlines in comment
+    whiteSpace: 'pre-wrap', // For newlines in comment
+    overflowWrap: 'break-word', // For overflow text to wrap
   },
   summary: {
     overflow: 'hidden'
@@ -55,10 +57,11 @@ const Comment = (props) => {
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
         <ListItemText
+          disableTypography
           primary={comment.author + ' ' + comment.date.substring(0,10)}
           secondary={
             <React.Fragment>
-              <Typography className={classes.newline} component="span" variant="body2" color="textPrimary" noWrap>
+              <Typography className={classes.newline} variant="body2" color="textPrimary">
                 {comment.text}
               </Typography>
             </React.Fragment>
@@ -67,6 +70,7 @@ const Comment = (props) => {
       </ListItem>
       {/* Reply */}
       <ReplyButton postId={comment.postId} commentId={comment._id} replies={replies} setReplies={setReplies}/>
+      {/*<ViewRepliesButton commentId={comment._id}/>*/}
       {/* Gen comments */}
       {replies ? genComment(replies, index) : ''}
     </div>
