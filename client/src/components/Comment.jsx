@@ -43,7 +43,7 @@ const Comment = (props) => {
 
   useEffect(() => {
     // Get nested comments (replies)
-    fetch(`/api/replies/${comment._id}`)  // For production: https://pandoratv.tk/api/..."
+    fetch(`/api/comments/replies/${comment._id}`)  // For production: https://pandoratv.tk/api/..."
       .then(res => res.json())
       .then(data => {
         setReplies([...data.comments])
