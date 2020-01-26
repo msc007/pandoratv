@@ -18,13 +18,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ReplyButton = (props) => {
-  const { commentId, postId, replies, setReplies } = props;
+  const { comment, replies, setReplies } = props;
   const classes = useStyles();
   const [passwordInput, setPasswordInput] = useState('');
+  const [nameInput, setNameInput] = useState('');
   const [replyOpen, setReplyOpen] = useState(false);
   const [replyInput, setReplyInput] = useState('');
+  const [nameError, setNameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [replyError, setReplyError] = useState('');
+  // Name validation
+  useEffect(() => {
+    if(nameInput.length > 10)
+      setNameError('10 글자 이내');
+    else
+      setNameError('');
+  },[nameInput]);
   // Password validation
   useEffect(() => {
     if(passwordInput.length > 10)
@@ -45,11 +54,15 @@ const ReplyButton = (props) => {
   const handleChangeReply= (e) => {
     setReplyInput(e.target.value);
   };
+  const handleChangeName = (e) => {
+    setNameInput(e.target.value);
+  };
   const handleChangePassword = (e) => {
     setPasswordInput(e.target.value);
   };
   const handleCancel = () => {
     setReplyInput('');
+    setNameInput('');
     setPasswordInput('');
     setReplyOpen(false);
   };
@@ -61,18 +74,20 @@ const ReplyButton = (props) => {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          'postId': postId,
-          'parentId': commentId,
-          'author': '민석',      //TODO: need to change anonymouse userid
+          'postId': comment.postId,
+          'parentId': comment._id,
+          'replyTo': comment.author,
+          'author': nameInput,
           'password': passwordInput,
           'text': replyInput,
-          'date': Date.now()
+          'date': Date.now(),
         })
       });
 
       if(res.status === 200) {
         const data = await res.json();
         setReplyInput('');
+        setNameInput('');
         setPasswordInput('');
         setReplyOpen(false);
         setReplies([...replies, data.comment]);
@@ -90,12 +105,13 @@ const ReplyButton = (props) => {
       {replyOpen ? 
         <Box pl={9}>
           <form component='span' className={classes.form} onSubmit={handleSubmit} autoComplete='off'>
+            <TextField label='닉네임' type='text' value={nameInput} onChange={handleChangeName} error={nameError !== ''} helperText={nameError} />
             <TextField label='비밀번호' type='password' value={passwordInput} onChange={handleChangePassword} error={passwordError !== ''} helperText={passwordError} />
             <TextField id='standard-multiline-flexible' label='댓글 달기...' multiline rowsMax={4} value={replyInput} onChange={handleChangeReply} error={replyError !== ''} helperText={replyError} fullWidth/>
             <Box display='flex' flexDirection='row-reverse' p={1} m={1} bgcolor='background.paper'>
               <ButtonGroup color='primary'>
                 <Button type='button' variant='outlined' onClick={handleCancel}>취소</Button>
-                <Button type='submit' variant='contained' disabled={replyInput === '' || passwordInput === '' || passwordError || replyError }>댓글</Button>
+                <Button type='submit' variant='contained' disabled={replyInput === '' || nameInput === '' || passwordInput === '' || passwordError || replyError }>댓글</Button>
               </ButtonGroup>
             </Box>
           </form>

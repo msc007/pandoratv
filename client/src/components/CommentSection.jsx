@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
   form: {
     width: '100%',
     PaddingBottom: theme.spacing(4),
+    '& > *': {
+      margin: theme.spacing(1),
+    }
   },
   newline: {
     whiteSpace: 'pre-wrap'  // For newlines in comment
@@ -34,10 +37,13 @@ const CommentSection = (props) => {
   const { postId } = props;
   const classes = useStyles();
   const [commentInput, setCommentInput] = useState('');
+  const [nameInput, setNameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [comments, setComments] = useState([]);
+  const [nameError, setNameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [commentError, setCommentError] = useState('');
+
   useEffect(() => {
     fetch(`/api/comments/${postId}`)  // For production: https://pandoratv.tk/api/user'
       .then(res => res.json())
@@ -45,6 +51,13 @@ const CommentSection = (props) => {
         setComments([...data.comments])
       });
   }, [postId]);
+  // Name Validation
+  useEffect(() => {
+    if(nameInput.length > 10)
+      setNameError('10 글자 이내');
+    else
+      setNameError('');
+  },[nameInput]);
   // Password validation
   useEffect(() => {
     if(passwordInput.length > 10)
@@ -63,11 +76,15 @@ const CommentSection = (props) => {
   const handleChangeComment = (e) => {
     setCommentInput(e.target.value);
   };
+  const handleChangeName = (e) => {
+    setNameInput(e.target.value);
+  };
   const handleChangePassword = (e) => {
     setPasswordInput(e.target.value);
   };
   const handleCancel = (e) => {
     setCommentInput('');
+    setNameInput('');
     setPasswordInput('');
   };
   const handleSubmit = async (e) => {
@@ -79,16 +96,18 @@ const CommentSection = (props) => {
         body: JSON.stringify({
           'postId': postId,
           'parentId': null,
-          'author': '민석',      //TODO: need to change anonymouse userid
+          'replyTo': '',
+          'author': nameInput,
           'password': passwordInput,
           'text': commentInput,
-          'date': Date.now()
+          'date': Date.now(),
         })
       });
 
       if(res.status === 200) {
         const data = await res.json();
         setCommentInput('');
+        setNameInput('');
         setPasswordInput('');
         setComments([...comments, data.comment]);
       }
@@ -103,24 +122,22 @@ const CommentSection = (props) => {
       <List>
         <Divider component='li' />
         <ListItem alignItems='flex-start'>
-          <ListItemAvatar>
-            <Avatar alt='Remy Sharp' src='/static/images/avatar/1.jpg' />
-          </ListItemAvatar>
           <form component='span' className={classes.form} onSubmit={handleSubmit} autoComplete='off'>
+            <TextField label='닉네임' type='text' value={nameInput} onChange={handleChangeName} error={nameError !== ''} helperText={nameError} />
             <TextField label='비밀번호' type='password' value={passwordInput} onChange={handleChangePassword} error={passwordError !== ''} helperText={passwordError}/>
             <TextField id='standard-multiline-flexible' label='댓글 달기...' multiline rowsMax={4} value={commentInput} onChange={handleChangeComment} error={commentError !== ''} helperText={commentError} fullWidth/>
             <Box display='flex' flexDirection='row-reverse' p={1} m={1} bgcolor='background.paper'>
               <ButtonGroup color='primary'>
                 <Button type='button' variant='outlined' onClick={handleCancel}>취소</Button>
-                <Button type='submit' variant='contained' disabled={commentInput === '' || passwordInput === '' || passwordError || commentError }>댓글</Button>
+                <Button type='submit' variant='contained' disabled={commentInput === '' || nameInput === '' || passwordInput === '' || passwordError || commentError }>댓글</Button>
               </ButtonGroup>
             </Box>
           </form>
         </ListItem>
         <Divider component='li' />
         { /* Comments */
-          comments.map((comment, index) => (
-            <Comment key={comment._id} index={index} comment={comment}/>
+          comments.map((comment) => (
+            <Comment key={comment._id} index={0} comment={comment}/>
           ))
         }
       <Divider component='li' />

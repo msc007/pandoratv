@@ -51,16 +51,23 @@ const Comment = (props) => {
   }, [comment._id]);
 
   return (
-    <div className={index > 0 ? classes.reply : ''}>
+    <div className={index === 1 ? classes.reply : ''}>
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          <Avatar alt={comment.author} src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
         <ListItemText
           disableTypography
           primary={comment.author + ' ' + comment.date.substring(0,10)}
           secondary={
             <React.Fragment>
+            {comment.replyTo  && index > 1 ?
+              <Typography variant="body2" color='textSecondary'>
+                {'@' + comment.replyTo}
+              </Typography>
+              :
+              ''
+            }
               <Typography className={classes.newline} variant="body2" color="textPrimary">
                 {comment.text}
               </Typography>
@@ -69,7 +76,7 @@ const Comment = (props) => {
         />
       </ListItem>
       {/* Reply */}
-      <ReplyButton postId={comment.postId} commentId={comment._id} replies={replies} setReplies={setReplies}/>
+      <ReplyButton comment={comment} replies={replies} setReplies={setReplies}/>
       {/*<ViewRepliesButton commentId={comment._id}/>*/}
       {/* Gen comments */}
       {replies ? genComment(replies, index) : ''}

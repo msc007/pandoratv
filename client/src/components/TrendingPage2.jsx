@@ -77,7 +77,7 @@ const TrendingPage2 = () => {
     // Attach intersection observer for checking if reached last content, then increment page number
     observer.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting && hasMore) {
-        setPageNumber(p => p +1)
+        setPageNumber(p => p + 1)
       }
     });
     // attach observer to current node

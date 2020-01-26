@@ -4,7 +4,15 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 
 // For Responsive Typography
-let theme = createMuiTheme();
+let theme = createMuiTheme({
+  typography: {
+    "fontFamily": "\"Noto Sans KR\", sans-serif",
+    "fontWeightLight": 300,
+    "fontWeightRegular": 400,
+    "fontWeightMedirum": 500,
+    "fontWeightBold:": 700,
+   }
+});
 theme = responsiveFontSizes(theme);
 
 class App extends Component {

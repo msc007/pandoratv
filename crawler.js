@@ -3,9 +3,10 @@ const app = express();
 const axios = require('axios');
 const cheerio = require('cheerio');
 const mongoose = require('mongoose');
-//const cron = require('node-cron');
+const cron = require('node-cron');
 const dotenv = require('dotenv').config();
 const Post = require('./models/Post');
+const sanitizeHTML = require('sanitize-html')
 
 // Set static public directory (for css/jquery/etc...)
 // app.use(express.static(path.join(__dirname + '/public')));
@@ -43,12 +44,14 @@ mongoose
   * Day of Week(0-7) 0 and 7 is sunday
   */
 
-  //cron.schedule('0 0 */1 * * *', () => {
+  // every 6 hour crawl
+  //cron.schedule('0 0 */6 * * *', () => {
   //  time = new Date();
-  //  main();
-  //  console.log('\nScheduled task running every hour at 0 second and 0 minute.');
+  //clien_crawler();
+  //  console.log('\nScheduled task running every 6 hour at 0 second and 0 minute.');
   //});
 
+//clien_crawler();
 // CLIEN
 async function clien_crawler() {
   try {
@@ -67,7 +70,7 @@ async function clien_crawler() {
     if(response.status === 200) {
       const rawHTML = response.data;
       const $ = cheerio.load(rawHTML);
-      let links = [];
+      let urls= [];
       // Scrape all the links
       const post_list = $('div.recommend_underList').children('div').each(function() {
         let titleLength = $(this).find('div.list_title').children().length;
@@ -77,20 +80,16 @@ async function clien_crawler() {
           post_hit = post_hit.replace(' k','').replace('.','');
           post_hit *= 100;
         }
-        //TODO: consider only parse post with image
-        // Add to list only if hit is > x
-        if(post_hit > 20000 && titleLength === 3) {
+        // Add to list only if hit is > x and has image
+        if(post_hit > 30000 && titleLength === 3) {
           const post_url = 'https://www.clien.net' + $(this).find('a.list_subject').attr('href').replace('?type=recommend','');
-          links.push(post_url);
+          urls.push(post_url);
         }
       })
 
-      // Visit each links for crawling
-      for(link of links) {
-        const max = 5;
-        const min = 1;
-        const rand = Math.floor(Math.random() * (max - min + 1) + min);
-        const response = await axios.get(link, {
+      // Visit each url for crawling
+      for(url of urls) {
+        const response = await axios.get(url, {
           headers: {
             'User-Agent': userAgent,
             Cookie: "CDNSEC=e19a50f57ff50fc4b8485dd88ef59115;",  // To avoid Clien crawling detection
@@ -103,61 +102,62 @@ async function clien_crawler() {
           const hasCategory = $('h3.post_subject').children('span').length == 2 ? true : false;
           const title = hasCategory ? $('#div_content > div.post_title.symph_row > h3 > span:nth-child(2)').text().trim() : $('#div_content > div.post_title.symph_row > h3 > span').text().trim(); 
           const img_urls = [];
-          const article = [];
           let text = "";
+          // Sanitize content HTML
+          const content = sanitizeHTML($('#div_content > div.post_view > div.post_content > article > div'), {
+            allowedTags: ['img', 'video', 'p', 'div', 'a', 'source'],
+            allowedAttributes: {
+              'img': ['src', 'alt', 'width', 'height', 'display', 'style'],
+              'a': ['href', 'target', 'rel'],
+              'video': ['poster', 'autoplay', 'loop', 'preload', 'width', 'height', 'playsinline', 'muted', 'display', 'style'],
+              'source': ['src', 'type'],
+            },
+            allowedIframeHostnames: ['www.youtube.com'],
+            exclusiveFilter: function(frame) {
+              return frame.tag === 'a' && frame.text.trim() === 'GIF';
+            },
+            transformTags: {
+              'img': sanitizeHTML.simpleTransform('img', {height: 'auto', display: 'block', style: 'max-width: 100%'}), // max-width only down scale,
+              'video': sanitizeHTML.simpleTransform('video', {height: 'auto', display: 'block', style: 'max-width: 100%'}),
+            },
+          });        
 
-          // Iterate each <p> tag
+          // Iterate each <p> tag to get img_urls
           $('#div_content > div.post_view > div.post_content > article > div').children('p').each(function() {
             const img_url = $(this).children('img').attr('src');
-            const out_link = $(this).find('.url').attr('src');
-            const gif_url = $(this).find('video').attr('poster');
-
-            //TODO: consider crawl entire article by sanitize-html package or iconv-lite https://namunotebook.tistory.com/10
-            // consider article way 
             if(img_url) {
               img_urls.push(img_url);
-              //article.push({type: 'img', data: img_url});
-            } else if(gif_url) {
-              // TODO: consider handle .gif
-            } else if(out_link) {
-              text += `<a href='${out_link}' target='_blank'>${out_link}</a>` + '\n';
-              //article.push({type: 'link', data: out_link})
-            } else if($(this).text().trim() !== "") {
-              text += $(this).text().trim() + '\n';
-              //article.push({type: 'text', data: $(this).text().trim()});
-            } else {
-              // Case where text is not wrapped in <p></p>
-              text += $(this).text().trim() + '\n';
             }
           });
-          // Create new post
-          let newPost = new Post({
-            title: title,
-            source: link,
-            img_urls: img_urls,
-            text: text,
-            category: 'test',
-            hits: 0
-          });
-          console.log(newPost);
-          //console.log(article);
           
-          // Create new post if given URL is not exist.
-          await Post.findOneAndUpdate(
-            { source: link },
-            { $setOnInsert: newPost },
-            { upsert: true, new: true});
+          // Validate post, then insert to DB if not exist
+          if(title && url && content && img_urls.length > 0 ) {
+            // Create new post
+            let newPost = new Post({
+              title: title,
+              source: url,
+              img_urls: img_urls,
+              text: content,
+              category: 'test',
+              hits: 0
+            });
+            console.log(newPost);
+            
+            // Create new post if given URL is not exist.
+            await Post.findOneAndUpdate(
+              { source: url },
+              { $setOnInsert: newPost },
+              { upsert: true, new: true});
+          }
         }
+        // wait for certain amount for each reqeust
+        await wait(); 
       } 
     }
   } catch(e) {
     console.log(e);
   }
 }
-
-//lien_crawler();
-
-
 
 //FMKOREA
 async function fmkorea_crawler() {
@@ -184,36 +184,34 @@ async function fmkorea_crawler() {
 
       // Visit each links for crawling
       for(link of links) {
-        const max = 5;
-        const min = 1;
+        const min = 2;
+        const max = 8;
         const rand = Math.floor(Math.random() * (max - min + 1) + min);
-        setTimeout(async function() {
-          const response = await axios.get(link, {
-            headers: {
-              'User-Agent': userAgent
-            }
-          });
-
-          if(response.status === 200) {
-            const rawHTML = response.data;
-            const $ = cheerio.load(rawHTML);
-            const title = $('span.np_18px_span').text().trim();
-            const img_urls = [];
-            $('article').find('img').each(function() {
-              const img_url = $(this).attr('src');
-              img_urls.push(img_url);
-            })
-            let newPost = new Post({
-              title: title,
-              source: link,
-              img_urls: img_urls,
-              text: "test text",
-              category: 'test',
-              hits: 0
-            });
-            console.log(newPost);
+        const response = await axios.get(link, {
+          headers: {
+            'User-Agent': userAgent
           }
-        }, rand * 1000);  
+        });
+
+        if(response.status === 200) {
+          const rawHTML = response.data;
+          const $ = cheerio.load(rawHTML);
+          const title = $('span.np_18px_span').text().trim();
+          const img_urls = [];
+          $('article').find('img').each(function() {
+            const img_url = $(this).attr('src');
+            img_urls.push(img_url);
+          })
+          let newPost = new Post({
+            title: title,
+            source: link,
+            img_urls: img_urls,
+            text: "test text",
+            category: 'test',
+            hits: 0
+          });
+          console.log(newPost);
+        }
       }
     }
   } catch(e) {
@@ -221,6 +219,16 @@ async function fmkorea_crawler() {
   }
 }
 //fmkorea_crawler();
+
+// setTimeOut wrapper for async/await
+const wait = () => {
+  const min = 5;
+  const max = 10;
+  const randTime = Math.floor(Math.random() * (max - min + 1) + min) * 1000;
+  return new Promise(resolve => {
+    setTimeout(resolve, randTime);
+  });
+}
 
 const PORT = process.env.CRAWLER_PORT;
 app.listen(PORT, () => console.log(`Crawler Server started on port ${PORT}`));

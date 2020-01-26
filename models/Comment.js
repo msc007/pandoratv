@@ -6,6 +6,7 @@ const CommentSchema = new Schema({
   _id: { type: Schema.Types.ObjectId, auto: true },
   postId: { type: Schema.Types.ObjectId, ref: 'Post' },
   parentId: { type: Schema.Types.ObjectId, ref: 'Comment'},
+  replyTo: String,
   author: String,
   password: String,
   text: String,

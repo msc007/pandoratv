@@ -70,6 +70,7 @@ app.post('/api/comments', async (req, res) => {
     const comment = new Comment({
       postId: req.body.postId,
       parentId: req.body.parentId,
+      replyTo: req.body.replyTo,
       author: req.body.author,
       password: req.body.password,
       text: req.body.text,

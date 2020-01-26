@@ -13,8 +13,13 @@ import EnterIcon from '@material-ui/icons/TransitEnterexit';
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },  
+    padding: theme.spacing(0, 0, 6),
+  },
+  content: {
+    paddingBottom: theme.spacing(8),
+    paddingTop: theme.spacing(6),
+
+  }
 }));
 
 // ContentPage Functional Component
@@ -45,7 +50,7 @@ const ContentPage = () => {
         <Typography variant="h5" align="center" color="textPrimary" gutterBottom>
           {post.title}
         </Typography>   
-        {
+        {/*
           images.map(img_url => (
               <React.Fragment key={img_url}>
                 <img src={img_url} alt='' style={{maxWidth: '100%', height: 'auto', display: 'block'}} />
@@ -53,10 +58,10 @@ const ContentPage = () => {
               </React.Fragment>
             )
           )
+          */
         }
-        <Typography variant="body1" gutterBottom>
-          {post.text}
-        </Typography>  
+        {/* Content */}
+        <div className={classes.content} dangerouslySetInnerHTML={{ __html: post.text}}/>
         <Button variant='outlined' href={post.source} target='_blank' rel='noopener' fullWidth>
           출처 사이트 방문하기
           <EnterIcon />

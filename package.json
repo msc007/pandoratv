@@ -27,6 +27,8 @@
     "express-rate-limit": "^5.0.0",
     "helmet": "^3.21.2",
     "mongoose": "^5.8.4",
+    "node-cron": "^2.0.3",
+    "sanitize-html": "^1.21.1",
     "validator": "^12.1.0"
   }
 }
