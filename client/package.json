@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.7.2",
     "@material-ui/icons": "^4.5.1",
+    "abortcontroller-polyfill": "^1.4.0",
     "react": "^16.2.0",
     "react-app-polyfill": "^1.0.5",
     "react-dom": "^16.2.0",
