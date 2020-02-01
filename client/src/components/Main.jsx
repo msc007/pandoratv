@@ -93,17 +93,13 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     height: '100vh',
-    overflow: 'auto',
+    overflow: 'hidden',
   },
   container: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(4, 0, 4),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    display: 'flex',
+    height: '90vh', // -10vh for appbar
     overflow: 'auto',
-    flexDirection: 'column',
   },
   icon: {
     marginRight: theme.spacing(2),
