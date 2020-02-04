@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import clsx from 'clsx';
 // Material-ui 
@@ -9,6 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Drawer from '@material-ui/core/Drawer';
 import DrawerList from './DrawerList';
+import Hidden from '@material-ui/core/Hidden';
 // Material-ui Icons
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -109,51 +110,95 @@ const useStyles = makeStyles(theme => ({
 // Main Functional Component
 const Main = () => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const handleDrawerToggle = () => {
+    setOpen(!open);
   };
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleMobileDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
   return (
     <div className={classes.root}>
       <Router>
         {/* NAVIGATION BAR */}
-        <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-          <Toolbar className={classes.toolbar}>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <LiveTvIcon className={classes.icon} />
-            <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-              PandoraTV
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <Hidden xsDown>
+          <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+            <Toolbar className={classes.toolbar}>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerToggle}
+                className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <LiveTvIcon className={classes.icon} />
+              <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                PandoraTV
+              </Typography>
+            </Toolbar>
+          </AppBar>
+        </Hidden>
+        {/* MOBILE NAVIGATION BAR */}
+        <Hidden smUp>
+          <AppBar position="absolute" className={clsx(classes.appBar, mobileOpen && classes.appBarShift)}>
+            <Toolbar className={classes.toolbar}>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleMobileDrawerToggle}
+                className={clsx(classes.menuButton, mobileOpen && classes.menuButtonHidden)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <LiveTvIcon className={classes.icon} />
+              <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                PandoraTV
+              </Typography>
+            </Toolbar>
+          </AppBar>
+        </Hidden>
         {/* LEFT SIDE DRAWER */}
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-          }}
-          open={open}
-        >
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <DrawerList />
-        </Drawer>
+        <Hidden xsDown> 
+          <Drawer
+            variant='permanent'
+            classes={{
+              paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+            }}
+            open={open}
+            onClose={handleDrawerToggle}
+          >
+            <div className={classes.toolbarIcon}>
+              <IconButton onClick={handleDrawerToggle}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </div>
+            <DrawerList />
+          </Drawer>
+        </Hidden>
+        {/* MOBILE LEFT SIDE DRAWER */}
+        <Hidden smUp>
+          <Drawer
+            variant="temporary"
+            classes={{
+              paper: clsx(classes.drawerPaper, !mobileOpen && classes.drawerPaperClose),
+            }}
+            open={mobileOpen}
+            onClose={handleMobileDrawerToggle}
+          >
+            <div className={classes.toolbarIcon}>
+              <IconButton onClick={handleMobileDrawerToggle}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </div>
+            <DrawerList />
+          </Drawer>
+        </Hidden>
         {/* MAIN CONTENTS */}
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
