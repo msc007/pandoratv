@@ -130,8 +130,8 @@ const TrendingPage2 = () => {
           ))}
         </Grid>
       </Container>
-    {loading ? <Loading/>: ''}
-    {error ? 'Error while loading': ''}
+      {loading ? <Loading/>: ''}
+      {error ? 'Error while loading': ''}
     </div>
   );
 }

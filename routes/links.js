@@ -9,13 +9,13 @@ const helmet = require('helmet');
 const addLinkLimiter = rateLimit({
   // status code 429 will be returned when 'max' exceeded
   windowMs: 60 * 60 * 1000, // 1 hour
-  max: 5,
+  max: 10,
   message: { limitErrorMessage: 'Too many request made from this IP, please try again after 1 hour' },
 });
 const bugReportLimiter = rateLimit({
   // status code 429 will be returned when 'max' exceeded
   windowMs: 60 * 60 * 1000, // 1 hour
-  max: 5,
+  max: 30,
   message: { limitErrorMessage: 'Too many request made from this IP, please try again after 1 hour' },
 });
 
