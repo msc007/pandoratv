@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import ErrorIcon from '@material-ui/icons/ErrorOutline';
 
 const BugReportButton = (props) => {
-  const { siteName, id } = props;
+  const { siteName, siteId } = props;
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -18,16 +18,21 @@ const BugReportButton = (props) => {
     setOpen(false);
   };
 
-  const handleSubmit = async (id) => {
+  const handleSubmit = async (siteId) => {
     try {
-      const res = await fetch(`/api/links/bug/${id}`, {
-        method: 'PATCH',
-        headers: {'Content-Type': 'application/json'},
-      });
-      // Alert rate limit error message
-      if(res.status === 429) {
-        const jsonRes = await res.json();
-        alert(jsonRes.limitErrorMessage);
+      if(sessionStorage.getItem(siteId) !== 'true') {
+        const res = await fetch(`/api/links/bug/${siteId}`, {
+          method: 'PATCH',
+          headers: {'Content-Type': 'application/json'},
+        });
+        // Alert rate limit error message
+        if(res.status === 429) {
+          const jsonRes = await res.json();
+          alert(jsonRes.limitErrorMessage);
+        }
+        sessionStorage.setItem(siteId, 'true');
+      } else {
+        alert('이미 신고하신 사이트입니다.');
       }
       setOpen(false);
     } catch(err) {
@@ -47,22 +52,12 @@ const BugReportButton = (props) => {
           <DialogContentText>
             해당 사이트 접속 문제시 신고 해주시면 검토후 처리됩니다
           </DialogContentText>
-          {/*
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-          />
-          */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary" variant='contained'>
             취소
           </Button>
-          <Button onClick={() => handleSubmit(id)} color="secondary" variant='contained'>
+          <Button onClick={() => handleSubmit(siteId)} color="secondary" variant='contained'>
             신고
           </Button>
         </DialogActions>

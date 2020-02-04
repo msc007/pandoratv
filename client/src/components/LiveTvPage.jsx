@@ -74,7 +74,7 @@ const LiveTvPage = () => {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <BugReportButton siteName={card.name} id={card._id} />
+                  <BugReportButton siteName={card.name} siteId={card._id} />
                 </CardActions>
               </Card>
             </Grid>
