@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 
-
 // Footer Functional Component
 const Footer = () => {
   return (

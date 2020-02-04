@@ -18,14 +18,19 @@
     "nodemon": "^1.14.6"
   },
   "dependencies": {
+    "aws-sdk": "^2.610.0",
     "axios": "^0.19.1",
     "cheerio": "^1.0.0-rc.3",
     "concurrently": "^3.5.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.16.2",
+    "express-rate-limit": "^5.0.0",
     "helmet": "^3.21.2",
     "mongoose": "^5.8.4",
+    "node-cron": "^2.0.3",
+    "sanitize-html": "^1.21.1",
+    "uuid": "^3.4.0",
     "validator": "^12.1.0"
   }
 }

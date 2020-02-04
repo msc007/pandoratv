@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Loading from './Loading';
+import BugReportButton from './BugReportButton';
 // Material-ui
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import Typography from '@material-ui/core/Typography';
+import UserPageModal from './UserPageModal';
 
 // Style
 const useStyles = makeStyles(theme => ({
-  container: {
+  root: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  buttonContainer: {
-    padding: theme.spacing(0, 0, 8),
+    padding: theme.spacing(0, 0, 6),
   },
   card: {
     height: '100%',
@@ -27,22 +25,23 @@ const useStyles = makeStyles(theme => ({
   },
   cardActionArea: {
     height: '100%'
-  }
+  },
 }));
 
-const LiveTvTable = () => {
+// UserTable Functional Component
+const UserPage = () => {
   const classes = useStyles();
   // React hook initialize state and setter
   const [rows, setRows] = useState([]);
   // React hook replace component lifecyle method, empty array makes the effect run on first render.
   useEffect(() => {
-    fetch('https://pandoratv.tk/api/links/livetv')  // For production: https://pandoratv.tk/api/links"
+    fetch('/api/links/user')  // For production: https://pandoratv.tk/api/user"
       .then(res => res.json())
       .then(rows => setRows([...rows]));
   }, []);
   // Increment view count of site
   const handleViewCount = async (id) => {
-    const res = await fetch(`https://pandoratv.tk/api/links/views/${id}`, {
+    const res = await fetch(`/api/links/user/views/${id}`, {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
     });
@@ -55,12 +54,13 @@ const LiveTvTable = () => {
   if(rows.length === 0) {
     return <Loading/>;
   }
+
   // Render Contents
   return (
-    <div className={classes.container}>
+    <div className={classes.root}>
       <Container maxWidth="xl">
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          해외 한인 라이브 TV 시청 사이트
+          유저 등록 채널
         </Typography>
         <Grid container spacing={4}>
           {rows.map(card => (
@@ -77,17 +77,16 @@ const LiveTvTable = () => {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="secondary">
-                    버그신고
-                  </Button>
+                  <BugReportButton siteName={card.name} siteId={card._id} />
                 </CardActions>
               </Card>
             </Grid>
           ))}
         </Grid>
       </Container>
+      <UserPageModal rows={rows} setRows={setRows}/>
     </div>
   );
 }
 
-export default LiveTvTable;
+export default UserPage;

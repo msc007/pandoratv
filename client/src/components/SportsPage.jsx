@@ -1,24 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import StandingModal from './StandingModal';
+import NextMatchModal from './NextMatchModal';
+import PremierScheduleModal from './PremierScheduleModal';
+import SonModal from './SonModal';
 import Loading from './Loading';
+import BugReportButton from './BugReportButton';
 // Material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
 
 // Style
 const useStyles = makeStyles(theme => ({
-  container: {
+  root: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
+    padding: theme.spacing(0, 0, 6),
   },
-  buttonContainer: {
-    padding: theme.spacing(0, 0, 8),
+  cardGrid: {
+    paddingTop: theme.spacing(4),
   },
   card: {
     height: '100%',
@@ -30,13 +34,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const WebHardTable = () => {
+const SportsPage = () => {
   const classes = useStyles();
   // React hook initialize state and setter
   const [rows, setRows] = useState([]);
   // React hook replace component lifecyle method, empty array makes the effect run on first render.
   useEffect(() => {
-    fetch('https://pandoratv.tk/api/links/webhard')  // For production: https://pandoratv.tk/api/links"
+    fetch('https://pandoratv.tk/api/links/livesports')  // For production: https://pandoratv.tk/api/links"
       .then(res => res.json())
       .then(rows => setRows([...rows]));
   }, []);
@@ -55,11 +59,28 @@ const WebHardTable = () => {
   if(rows.length === 0) {
     return <Loading/>;
   }
+  // Render Contents
   return (
-    <div className={classes.container}>
-      <Container maxWidth="xl">
+    <div className={classes.root}>
+      <Container maxWidth='xl'>
+        <Grid container spacing={1}>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
+            <StandingModal />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
+            <PremierScheduleModal />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
+            <NextMatchModal />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3} lg={3}>
+            <SonModal />
+          </Grid>
+        </Grid>
+      </Container>
+      <Container className={classes.cardGrid} maxWidth="xl">
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          미주 한인 웹하드
+          라이브 스포츠 스트리밍 사이트
         </Typography>
         <Grid container spacing={4}>
           {rows.map(card => (
@@ -76,9 +97,7 @@ const WebHardTable = () => {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="secondary">
-                    버그신고
-                  </Button>
+                  <BugReportButton siteName={card.name} siteId={card._id} />
                 </CardActions>
               </Card>
             </Grid>
@@ -89,4 +108,4 @@ const WebHardTable = () => {
   );
 }
 
-export default WebHardTable;
+export default SportsPage;
