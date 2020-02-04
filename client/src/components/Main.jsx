@@ -196,7 +196,7 @@ const Main = () => {
                 <ChevronLeftIcon />
               </IconButton>
             </div>
-            <DrawerList />
+            <DrawerList handleMobileDrawerToggle={handleMobileDrawerToggle}/>
           </Drawer>
         </Hidden>
         {/* MAIN CONTENTS */}

@@ -10,12 +10,8 @@ import ErrorIcon from '@material-ui/icons/ErrorOutline';
 const BugReportButton = (props) => {
   const { siteName, siteId } = props;
   const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
+  const handleOpenToggle = () => {
+    setOpen(!open);
   };
 
   const handleSubmit = async (siteId) => {
@@ -43,10 +39,10 @@ const BugReportButton = (props) => {
 
   return (
     <div>
-      <Button size="small" color="secondary" startIcon={<ErrorIcon/>} onClick={handleClickOpen}>
+      <Button size="small" color="secondary" startIcon={<ErrorIcon/>} onClick={handleOpenToggle}>
         버그신고
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={open} onClose={handleOpenToggle} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">{siteName}</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -54,7 +50,7 @@ const BugReportButton = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary" variant='contained'>
+          <Button onClick={handleOpenToggle} color="primary" variant='contained'>
             취소
           </Button>
           <Button onClick={() => handleSubmit(siteId)} color="secondary" variant='contained'>

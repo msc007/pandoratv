@@ -28,11 +28,8 @@ const UserPageModal = (props) => {
   const [siteDescription, setSiteDescription] = useState('');
 
   // Modal State
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
+  const handleOpenToggle = () => {
+    setOpen(!open);
   };
   // Handle form submit
   const handleSubmit = async (e) => {
@@ -75,10 +72,10 @@ const UserPageModal = (props) => {
   }
   return (
     <div>
-      <Fab className={classes.fab} color="primary" aria-label="add" onClick={handleClickOpen}>
+      <Fab className={classes.fab} color="primary" aria-label="add" onClick={handleOpenToggle}>
         <AddIcon />
       </Fab>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={open} onClose={handleOpenToggle} aria-labelledby="form-dialog-title">
         <form onSubmit={handleSubmit}>
           <Card>
             <CardHeader title="사이트 등록" subheader='미주 한인들에게 알리고 싶거나 홍보하고 싶은 사이트가 있다면 등록해주세요.' align='center'/>
