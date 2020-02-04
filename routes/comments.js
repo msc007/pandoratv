@@ -5,9 +5,8 @@ const Comment = require('../models/Comment');
 /****** GET REQUEST ******/
 // Get nested replies
 router.get('/replies/:commentId', async (req,res) => {
-
   try {
-    const comments = await Comment.find({ parentId: req.params.commentId }).sort({date: 1});
+    const comments = await Comment.find({ replyOrigin: req.params.commentId }).sort({date: 1});
     res.status(200).json({ comments: comments });
   } catch(err) {
     res.status(500).json({ errorMessage: err.message });
@@ -31,7 +30,9 @@ router.post('/', async (req, res) => {
     const comment = new Comment({
       postId: req.body.postId,
       parentId: req.body.parentId,
+      replyOrigin: req.body.replyOrigin,
       replyTo: req.body.replyTo,
+      index: req.body.index,
       author: req.body.author,
       password: req.body.password,
       text: req.body.text,

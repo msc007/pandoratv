@@ -96,7 +96,9 @@ const CommentSection = (props) => {
         body: JSON.stringify({
           'postId': postId,
           'parentId': null,
+          'replyOrigin': null,
           'replyTo': '',
+          'index': 0,
           'author': nameInput,
           'password': passwordInput,
           'text': commentInput,

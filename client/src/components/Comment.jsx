@@ -28,7 +28,11 @@ const useStyles = makeStyles(theme => ({
   },
   reply: {
     paddingLeft: theme.spacing(6)
-  }
+  },
+  avatar: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
 }));
 
 const genComment = (comments, index) => {
@@ -42,35 +46,50 @@ const Comment = (props) => {
   const [replies, setReplies] = useState([]);
 
   useEffect(() => {
-    // Get nested comments (replies)
-    fetch(`/api/comments/replies/${comment._id}`)  // For production: https://pandoratv.tk/api/..."
-      .then(res => res.json())
-      .then(data => {
-        setReplies([...data.comments])
+    if(index === 0) { // Fetching only once per post comment
+      // Get replies
+      fetch(`/api/comments/replies/${comment._id}`)  // For production: https://pandoratv.tk/api/..."
+        .then(res => res.json())
+        .then(data => {
+          setReplies([...data.comments])
       });
-  }, [comment._id]);
+    }
+  }, [comment._id, index]);
 
   return (
     <div className={index === 1 ? classes.reply : ''}>
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar alt={comment.author} src="/static/images/avatar/1.jpg" />
+          <Avatar className={index > 0 ? classes.avatar: ''} alt={comment.author} src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
         <ListItemText
           disableTypography
-          primary={comment.author + ' ' + comment.date.substring(0,10)}
+          primary={
+            <React.Fragment>
+              <Typography variant='subtitle2' display='inline'>
+                {comment.author}
+                {' '}
+              </Typography>
+              <Typography variant='caption' display='inline' align='right'>
+                {comment.date.substring(0,10)}
+              </Typography>
+            </React.Fragment>
+          }
           secondary={
             <React.Fragment>
-            {comment.replyTo  && index > 1 ?
-              <Typography variant="body2" color='textSecondary'>
+            {comment.replyTo  && comment.index > 1 ?
+              <Typography component='div' variant="body2" color='primary'>
                 {'@' + comment.replyTo}
+                {' '}
+                <Typography className={classes.newline} display='inline' variant="body2" color="textPrimary">
+                  {comment.text}
+                </Typography>
               </Typography>
               :
-              ''
-            }
               <Typography className={classes.newline} variant="body2" color="textPrimary">
                 {comment.text}
               </Typography>
+            }
             </React.Fragment>
           }
         />

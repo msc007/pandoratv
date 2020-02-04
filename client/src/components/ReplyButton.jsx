@@ -76,7 +76,9 @@ const ReplyButton = (props) => {
         body: JSON.stringify({
           'postId': comment.postId,
           'parentId': comment._id,
+          'replyOrigin': comment.replyOrigin ? comment.replyOrigin : comment._id,
           'replyTo': comment.author,
+          'index': comment.index + 1,
           'author': nameInput,
           'password': passwordInput,
           'text': replyInput,
@@ -100,7 +102,7 @@ const ReplyButton = (props) => {
   return (
     <div>
       <Box pl={8}>
-        <Button color='primary' onClick={handleOpen}>댓글달기 </Button>
+        <Button color='primary' onClick={handleOpen}>댓글달기</Button>
       </Box>
       {replyOpen ? 
         <Box pl={9}>
