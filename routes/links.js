@@ -4,6 +4,7 @@ const rateLimit = require('express-rate-limit');
 const Link = require('../models/Link');
 const UserLink = require('../models/UserLink');
 const helmet = require('helmet');
+const validator = require('validator');
 
 /****** RATE LIMIT ******/
 const addLinkLimiter = rateLimit({
