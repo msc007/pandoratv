@@ -45,7 +45,7 @@ const CommentSection = (props) => {
   const [commentError, setCommentError] = useState('');
 
   useEffect(() => {
-    fetch(`/api/comments/${postId}`)  // For production: https://pandoratv.tk/api/user'
+    fetch(`https://pandoratv.tk/api/comments/${postId}`)  // For production: https://pandoratv.tk/api/user'
       .then(res => res.json())
       .then(data => {
         setComments([...data.comments])
@@ -90,7 +90,7 @@ const CommentSection = (props) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const res = await fetch('/api/comments', {
+      const res = await fetch('https://pandoratv.tk/api/comments', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
