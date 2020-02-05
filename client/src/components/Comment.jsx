@@ -48,7 +48,7 @@ const Comment = (props) => {
   useEffect(() => {
     if(index === 0) { // Fetching only once per post comment
       // Get replies
-      fetch(`/api/comments/replies/${comment._id}`)  // For production: https://pandoratv.tk/api/..."
+      fetch(`https://pandoratv.tk/api/comments/replies/${comment._id}`)  // For production: https://pandoratv.tk/api/..."
         .then(res => res.json())
         .then(data => {
           setReplies([...data.comments])
