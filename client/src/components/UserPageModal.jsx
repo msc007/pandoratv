@@ -35,7 +35,7 @@ const UserPageModal = (props) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const res = await fetch('/api/links/user', {
+      const res = await fetch('https://pandoratv.tk/api/links/user', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({

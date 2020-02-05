@@ -44,7 +44,7 @@ const TrendingPage2 = () => {
       try {
         setLoading(true)
         setError(false)
-        const res = await fetch(`/api/posts/trending/${pageNumber}`, {signal: signal }); // signal to aborting request
+        const res = await fetch(`https://pandoratv.tk/api/posts/trending/${pageNumber}`, {signal: signal }); // signal to aborting request
         const data = await res.json();
         setRows(prev => [...new Set([...prev, ...data])]);  // set() for handle duplicate contents
         setHasMore(data && data.length > 0);

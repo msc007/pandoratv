@@ -17,7 +17,7 @@ const BugReportButton = (props) => {
   const handleSubmit = async (siteId) => {
     try {
       if(sessionStorage.getItem(siteId) !== 'true') {
-        const res = await fetch(`/api/links/bug/${siteId}`, {
+        const res = await fetch(`https://pandoratv.tk/api/links/bug/${siteId}`, {
           method: 'PATCH',
           headers: {'Content-Type': 'application/json'},
         });
