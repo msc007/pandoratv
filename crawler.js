@@ -27,6 +27,21 @@ mongoose
   .then(() => console.log('MongoDB Connected for crawler'))
   .catch(err => console.log('Failed to connect: ', err));
 
+/* NOTE ABOUT CRON:
+* Second(0-59)
+* Minute(0-59)
+* Hour(0-23)
+* Day(1-31)
+* Month(1-12)
+* Day of Week(0-7) 0 and 7 is sunday
+*/
+
+//Run every 6 hour crawl
+cron.schedule('0 0 */6 * * *', () => {
+  clien_crawler();
+  console.log('\nScheduled task running every 6 hour at 0 second and 0 minute.');
+});
+
 //디씨 안됨
 //http://mlbpark.donga.com/mp/best.php?b=bullpen&m=view 엠팍 가능
 //루리웹 안됨
@@ -40,33 +55,9 @@ mongoose
 //이토
 //웃대
 
-  /* NOTE ABOUT CRON:
-  * Second(0-59)
-  * Minute(0-59)
-  * Hour(0-23)
-  * Day(1-31)
-  * Month(1-12)
-  * Day of Week(0-7) 0 and 7 is sunday
-  */
 
-  // every 6 hour crawl
-  //cron.schedule('0 0 */6 * * *', () => {
-  //  time = new Date();
-  //clien_crawler();
-  //  console.log('\nScheduled task running every 6 hour at 0 second and 0 minute.');
-  //});
-
-//clien_crawler();
 //fmkorea_crawler();
 
-// For test
-const main = () => {
-  const urls =[];
-  urls.push('https://cdn.clien.net/web/api/file/F01/9534475/be6dec929d378.jpg?w=780&h=30000');
-  
-  uploadToS3(urls);
-}
-//main();
-const PORT = process.env.CRAWLER_PORT;
-app.listen(PORT, () => console.log(`Crawler Server started on port ${PORT}`));
+//const PORT = process.env.CRAWLER_PORT;
+//app.listen(PORT, () => console.log(`Crawler Server started on port ${PORT}`));
 

@@ -50,10 +50,6 @@ const UserPage = () => {
       console.log('Error occured during update view count');
     }
   }
-  // Loading Spinner
-  if(rows.length === 0) {
-    return <Loading/>;
-  }
 
   // Render Contents
   return (
