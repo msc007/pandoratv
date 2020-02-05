@@ -10,7 +10,7 @@ const router = express.Router();
 if( ENV === 'production') {
   console.log('Production Environment');
   const cors = require('cors');
-  app.use(cors({ origin: 'https://pandoratv.cf' }));
+  app.use(cors({ origin: 'https://pandorausa.net' }));
 }
 app.use(helmet());  // For security: consider csurf package later on
 app.use(express.urlencoded({ extended: true }));
