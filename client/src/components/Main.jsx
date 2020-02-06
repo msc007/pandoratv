@@ -136,7 +136,7 @@ const Main = () => {
               </IconButton>
               <LiveTvIcon className={classes.icon} />
               <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                PandoraTV
+                PandoraUSA
               </Typography>
             </Toolbar>
           </AppBar>
@@ -156,7 +156,7 @@ const Main = () => {
               </IconButton>
               <LiveTvIcon className={classes.icon} />
               <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                PandoraTV
+                PandoraUSA
               </Typography>
             </Toolbar>
           </AppBar>
