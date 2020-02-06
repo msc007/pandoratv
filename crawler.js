@@ -56,7 +56,7 @@ mongoose
   //  console.log('\nScheduled task running every 6 hour at 0 second and 0 minute.');
   //});
 
-//clien_crawler();
+clien_crawler();
 //fmkorea_crawler();
 
 

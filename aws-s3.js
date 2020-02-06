@@ -23,7 +23,7 @@ exports.uploadToS3 = async (url) => {
       // Upload image stream to S3 bucket
       const contentType = response.headers['content-type'];
       const fileExtension = contentTypeParser(contentType);
-      const uploadResponse = await s3Client.upload({
+      return s3Client.upload({
         Bucket: process.env.BUCKET_NAME,
         ACL: 'public-read',                             // public-read access
         Key: uuidv5(url, uuidv5.URL) + fileExtension,   // generate unique key based on image URL with file extension
