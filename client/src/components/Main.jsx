@@ -26,8 +26,6 @@ import CommunityPage from './CommunityPage';
 import TrendingPage2 from './TrendingPage2';
 import ContentPage from './ContentPage';
 import AboutPage from './AboutPage';
-//import BoardPage from './BoardPage';
-//import BoardWritePage from './BoardWritePage';
 import Footer from './Footer';
 
 // Style

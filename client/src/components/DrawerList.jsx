@@ -42,14 +42,6 @@ const DrawerList = (props) => {
             </ListItemIcon>
             <ListItemText primary="트렌딩" />
           </ListItem>
-          {/*
-          <ListItem button component={Link} to='/board' onClick={()=> setActive('/board')} selected={active === '/board' ? true : false}> 
-            <ListItemIcon>
-              <MessageIcon />
-            </ListItemIcon>
-            <ListItemText primary="게시판" />
-          </ListItem>
-          */}
         </List>
       <Divider />     
       {/* SECONDARY */}
