@@ -50,16 +50,6 @@ const ContentPage = () => {
         <Typography variant="h5" align="center" color="textPrimary" gutterBottom>
           {post.title}
         </Typography>   
-        {/*
-          images.map(img_url => (
-              <React.Fragment key={img_url}>
-                <img src={img_url} alt='' style={{maxWidth: '100%', height: 'auto', display: 'block'}} />
-                <br/>
-              </React.Fragment>
-            )
-          )
-          */
-        }
         {/* Content */}
         <div className={classes.content} dangerouslySetInnerHTML={{ __html: post.text}}/>
         <Button variant='outlined' href={post.source} target='_blank' rel='noopener' fullWidth>

@@ -59,14 +59,8 @@ mongoose
 //clien_crawler();
 //fmkorea_crawler();
 
-// For test
-const main = () => {
-  const urls =[];
-  urls.push('https://cdn.clien.net/web/api/file/F01/9534475/be6dec929d378.jpg?w=780&h=30000');
-  
-  uploadToS3(urls);
-}
+
 //main();
-const PORT = process.env.CRAWLER_PORT;
-app.listen(PORT, () => console.log(`Crawler Server started on port ${PORT}`));
+//const PORT = process.env.CRAWLER_PORT;
+//app.listen(PORT, () => console.log(`Crawler Server started on port ${PORT}`));
 

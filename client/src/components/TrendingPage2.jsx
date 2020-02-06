@@ -91,8 +91,7 @@ const TrendingPage2 = () => {
       <Container maxWidth="xl">
         <Grid container spacing={4}>
           {rows.map((card, index) => (
-            rows.length === (index + 1) ?
-            (<Grid item key={card.title} ref={lastContentElementRef} xs={12} sm={6} md={4} lg={3}>
+            <Grid item key={card.title} ref={rows.length === (index + 1) ? lastContentElementRef : undefined} xs={12} sm={6} md={4} lg={3}>
               <Card className={classes.card}>
                 <CardActionArea className={classes.cardActionArea} component='a' href={`/contents/${card._id}`}>
                   <CardMedia
@@ -108,25 +107,6 @@ const TrendingPage2 = () => {
                 </CardActionArea>
               </Card>
             </Grid>
-            )
-            :
-            (<Grid item key={card.title} xs={12} sm={6} md={4} lg={3}>
-              <Card className={classes.card}>
-                <CardActionArea className={classes.cardActionArea} component='a' href={`/contents/${card._id}`}>
-                  <CardMedia
-                  className={classes.cardMedia}
-                  image={card.img_urls[0]}
-                  title={card.title}
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="subtitle2">
-                      {card.title}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Grid>
-            )
           ))}
         </Grid>
       </Container>
