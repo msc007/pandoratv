@@ -16,11 +16,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(0, 0, 6),
     height: '100%',
-
   },  
-  cardGrid: {
-    paddingTop: theme.spacing(4),
-  },
   card: {
     height: '100%',
     display: 'flex',
@@ -60,11 +56,9 @@ const Home = () => {
   return (
     <div className={classes.root}>
       <Container maxWidth="xl">
-        <Typography variant="h5" align="center" color="textSecondary">
+        <Typography variant="h5" align="center" color="textSecondary" paragraph>
           클릭수 상위 사이트
         </Typography>
-      </Container>
-     <Container className={classes.cardGrid} maxWidth="xl">
         <Grid container spacing={4}>
           {rows.map(card => (
             <Grid item key={card.name} xs={12} sm={6} md={4} lg={3}>
