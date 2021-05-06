@@ -29,7 +29,7 @@
     "helmet": "^3.21.2",
     "mongoose": "^5.8.4",
     "node-cron": "^2.0.3",
-    "sanitize-html": "^1.21.1",
+    "sanitize-html": "^2.3.2",
     "uuid": "^3.4.0",
     "validator": "^12.1.0"
   }
